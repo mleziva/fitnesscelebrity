@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FitnessCelebrity.Web.Models
 {
-    public class FitnessPath : BaseModel
+    public class FitnessPath : BasePost
     {
         public string Category { get; set; }
         public IList<FitnessPathWorkout> FitnessPathWorkouts { get; set; }
