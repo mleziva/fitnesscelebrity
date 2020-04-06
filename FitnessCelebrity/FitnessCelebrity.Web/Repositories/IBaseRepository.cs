@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitnessCelebrity.Web.Repositories
 {
-    interface IBaseRepository<TEntity>
+    public interface IBaseRepository<TEntity>
  where TEntity : BaseModel
     {
         IQueryable<TEntity> GetAll();

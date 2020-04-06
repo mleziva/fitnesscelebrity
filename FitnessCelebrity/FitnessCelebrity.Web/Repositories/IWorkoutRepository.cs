@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitnessCelebrity.Web.Repositories
 {
-    interface IWorkoutRepository : IBaseRepository<Workout>
+    public interface IWorkoutRepository : IBaseRepository<Workout>
     {
         Task<Workout> GetWorkouts();
     }

@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FitnessCelebrity.Web.Models;
+using FitnessCelebrity.Web.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitnessCelebrity.Web.Controllers
 {
@@ -11,11 +14,16 @@ namespace FitnessCelebrity.Web.Controllers
     [ApiController]
     public class WorkoutController : ControllerBase
     {
+        private readonly IWorkoutRepository workoutRepository;
+        public WorkoutController(IWorkoutRepository workoutRepository)
+        {
+            this.workoutRepository = workoutRepository;
+        }
         // GET: api/Workout
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<Workout>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await workoutRepository.GetAll().ToListAsync();
         }
 
         // GET: api/Workout/5
@@ -27,8 +35,10 @@ namespace FitnessCelebrity.Web.Controllers
 
         // POST: api/Workout
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> PostAsync([FromBody] Workout workout)
         {
+            await workoutRepository.Create(workout);
+            return Ok();
         }
 
         // PUT: api/Workout/5
