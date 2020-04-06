@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using FitnessCelebrity.Web.Repositories;
+using FitnessCelebrity.Web.Extensions;
 
 namespace FitnessCelebrity.Web
 {
@@ -90,6 +91,7 @@ namespace FitnessCelebrity.Web
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+                app.ConfigureExceptionHandler();
             }
             else
             {
