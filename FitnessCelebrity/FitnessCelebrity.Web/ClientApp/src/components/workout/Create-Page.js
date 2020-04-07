@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import authService from '../api-authorization/AuthorizeService'
+import FitnessPathForm from './FitnessPathForm'
 
 export class CreatePage extends Component {
     static displayName = CreatePage.name;
@@ -35,7 +36,7 @@ export class CreatePage extends Component {
             pathsDisplay = <p><Dropdown options={this.state.existingPaths} /></p>
         }
         if (displayNewPathForm) {
-            pathsDisplay = <p>New Paths!</p>
+            pathsDisplay = <p><FitnessPathForm/></p>
         }
       
 
