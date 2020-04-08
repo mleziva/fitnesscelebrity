@@ -10,8 +10,8 @@ namespace FitnessCelebrity.Web.Repositories
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseModel
     {
-        private readonly FitnessDbContext _dbContext;
-        public BaseRepository(FitnessDbContext dbContext)
+        private readonly ApplicationDbContext _dbContext;
+        public BaseRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }

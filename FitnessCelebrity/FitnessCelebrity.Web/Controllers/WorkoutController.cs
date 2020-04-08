@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using FitnessCelebrity.Web.Models;
+using FitnessCelebrity.Web.Models.Dto;
 using FitnessCelebrity.Web.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +16,12 @@ namespace FitnessCelebrity.Web.Controllers
     [ApiController]
     public class WorkoutController : ControllerBase
     {
+        private readonly IMapper mapper;
         private readonly IWorkoutRepository workoutRepository;
-        public WorkoutController(IWorkoutRepository workoutRepository)
+        public WorkoutController(IWorkoutRepository workoutRepository, IMapper mapper)
         {
             this.workoutRepository = workoutRepository;
+            this.mapper = mapper;
         }
         // GET: api/Workout
         [HttpGet]
@@ -35,9 +39,10 @@ namespace FitnessCelebrity.Web.Controllers
 
         // POST: api/Workout
         [HttpPost]
-        public async Task<ActionResult> PostAsync([FromBody] Workout workout)
+        public async Task<ActionResult> PostAsync([FromBody] WorkoutDtoCreate workout)
         {
-            await workoutRepository.Create(workout);
+            var workoutEntity = mapper.Map<Workout>(workout);
+            await workoutRepository.Create(workoutEntity);
             return Ok();
         }
 

@@ -14,6 +14,7 @@ namespace FitnessCelebrity.Web.Models
         public string ModifiedById { get; set; }
         public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset ModifiedDate { get; set; }
-        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser CreatedByUser { get; set; }
+        public virtual ApplicationUser ModifiedByUser { get; set; }
     }
 }

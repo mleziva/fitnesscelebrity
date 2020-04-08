@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using FitnessCelebrity.Web.Repositories;
 using FitnessCelebrity.Web.Extensions;
+using AutoMapper;
 
 namespace FitnessCelebrity.Web
 {
@@ -33,10 +34,6 @@ namespace FitnessCelebrity.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<FitnessDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -45,6 +42,7 @@ namespace FitnessCelebrity.Web
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
+
 
             services.AddControllersWithViews().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddRazorPages();
@@ -81,6 +79,8 @@ namespace FitnessCelebrity.Web
             });
 
             services.AddScoped<IWorkoutRepository, WorkoutRepository>();
+
+            //services.AddAutoMapper(typeof(Startup));
 
         }
 

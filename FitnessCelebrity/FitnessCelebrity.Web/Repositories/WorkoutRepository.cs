@@ -9,7 +9,7 @@ namespace FitnessCelebrity.Web.Repositories
 {
     public class WorkoutRepository : BaseRepository<Workout>, IWorkoutRepository
     {
-        public WorkoutRepository(FitnessDbContext dbContext)
+        public WorkoutRepository(ApplicationDbContext dbContext)
       : base(dbContext)
         {
 
