@@ -9,11 +9,11 @@ namespace FitnessCelebrity.Web.Models
     public class BaseModel
     {
         [Key]
-        public long Id { get; set; }
-
-        public long CreatedById { get; set; }
-        public long ModifiedById { get; set; }
+        public int Id { get; set; }
+        public string CreatedById { get; set; }
+        public string ModifiedById { get; set; }
         public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset ModifiedDate { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

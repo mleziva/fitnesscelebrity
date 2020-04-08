@@ -8,5 +8,9 @@ namespace FitnessCelebrity.Web.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public virtual IList<FitnessPath> FitnessPaths { get; set; }
+        public virtual IList<Workout> Workouts { get; set; }
+        public virtual IList<Movement> Movements { get; set; }
+
     }
 }
