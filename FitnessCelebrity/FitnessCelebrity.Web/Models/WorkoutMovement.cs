@@ -7,10 +7,10 @@ namespace FitnessCelebrity.Web.Models
 {
     public class WorkoutMovement
     {
-        public int MovementId { get; set; }
+        public long MovementId { get; set; }
         public Movement Movement { get; set; }
 
-        public int WorkoutId { get; set; }
+        public long WorkoutId { get; set; }
         public Workout Workout { get; set; }
     }
 }

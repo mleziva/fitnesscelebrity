@@ -9,7 +9,7 @@ namespace FitnessCelebrity.Web.Models
     public class BaseModel
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string CreatedById { get; set; }
         public string ModifiedById { get; set; }
         public DateTimeOffset CreatedDate { get; set; }
