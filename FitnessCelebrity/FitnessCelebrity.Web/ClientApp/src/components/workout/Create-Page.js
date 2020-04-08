@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import authService from '../api-authorization/AuthorizeService'
 import FitnessPathForm from './FitnessPathForm'
+import {MovementSelectOrCreate} from './MovementSelectOrCreate'
 import WorkoutJson from './models/workout'
 
 export class CreatePage extends Component {
@@ -83,7 +84,7 @@ export class CreatePage extends Component {
                             <option value="text/other">Other</option>
                         </select>
                     </div>
-
+<MovementSelectOrCreate></MovementSelectOrCreate>
                     <input type="submit" className="btn btn-primary" value="Submit" />
                 </form>
             </div>

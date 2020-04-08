@@ -30,7 +30,8 @@ namespace FitnessCelebrity.Web.Extensions
                         await context.Response.WriteAsync(new ErrorDetails()
                         {
                             StatusCode = context.Response.StatusCode,
-                            Message = "Internal Server Error."
+                            Message = $"Exception message: {contextFeature.Error.Message} \\r\\n " +
+                            $"Inner Exception message: {contextFeature.Error.InnerException}"
                         }.ToString());
                     }
                 });
