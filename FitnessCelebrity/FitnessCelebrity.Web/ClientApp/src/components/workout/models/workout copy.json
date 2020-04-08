@@ -1,0 +1,29 @@
+{
+    "name": "",
+    "description": "",
+    "body": "",
+    "id": null,
+    "category": "",
+    "fitnessPathWorkouts": [
+      {
+        "fitnessPath": {
+          "category": "",
+          "name": "",
+          "description": "",
+          "body": "",
+          "id": null
+        }
+      }
+    ],
+    "workoutMovements": [
+      {
+        "movement": {
+          "type": "",
+          "name": "",
+          "description": "",
+          "body": "",
+          "id": null
+        }
+      }
+    ]
+  }
