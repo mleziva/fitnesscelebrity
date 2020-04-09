@@ -9,6 +9,6 @@ namespace FitnessCelebrity.Web.Models.Dto
     {
         public string Type { get; set; }
 
-        public IList<WorkoutMovement> WorkoutMovements { get; set; }
+        public IList<WorkoutMovementDtoCreate> WorkoutMovements { get; set; }
     }
 }

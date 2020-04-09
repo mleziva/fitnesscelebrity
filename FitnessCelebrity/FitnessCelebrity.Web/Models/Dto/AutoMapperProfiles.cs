@@ -10,11 +10,11 @@ namespace FitnessCelebrity.Web.Models.Dto
     {
         public AutoMapperProfiles()
         {
-            CreateMap<Movement, MovementDtoCreate>();
-            CreateMap<Workout, WorkoutDtoCreate>();
-            CreateMap<FitnessPath, FitnessPathDtoCreate>();
-            CreateMap<FitnessPathWorkout, FitnessPathWorkoutDtoCreate>();
-            CreateMap<WorkoutMovement, WorkoutMovementDtoCreate>();
+            CreateMap<MovementDtoCreate, Movement>();
+            CreateMap<WorkoutDtoCreate, Workout>();
+            CreateMap<FitnessPathDtoCreate, FitnessPath>();
+            CreateMap<FitnessPathWorkoutDtoCreate, FitnessPathWorkout>();
+            CreateMap<WorkoutMovementDtoCreate, WorkoutMovement>();
         }
     }
 }

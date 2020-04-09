@@ -8,7 +8,9 @@ namespace FitnessCelebrity.Web.Models.Dto
     public class WorkoutDtoCreate : BasePostDtoCreate
     {
         public string Category { get; set; }
-        public IList<FitnessPathWorkout> FitnessPathWorkouts { get; set; }
-        public IList<WorkoutMovement> WorkoutMovements { get; set; }
+        public IList<FitnessPathWorkoutDtoCreate> FitnessPathWorkouts { get; set; }
+        public IList<WorkoutMovementDtoCreate> WorkoutMovements { get; set; }
+
+        //potentially move all create DTO into a single file and remove nested fitnessPathWorkouts and workoutMovements
     }
 }

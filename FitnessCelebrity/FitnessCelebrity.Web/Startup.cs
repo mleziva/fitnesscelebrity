@@ -80,7 +80,7 @@ namespace FitnessCelebrity.Web
 
             services.AddScoped<IWorkoutRepository, WorkoutRepository>();
 
-            //services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup));
 
         }
 
