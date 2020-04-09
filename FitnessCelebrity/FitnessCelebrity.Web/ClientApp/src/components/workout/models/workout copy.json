@@ -6,7 +6,9 @@
           "fitnessPath": {
               "name": "string2",
               "description": "string3",
-              "body": "string4"
+              "body": "string4",
+              "category": "cat32"
+
           }
         
       }

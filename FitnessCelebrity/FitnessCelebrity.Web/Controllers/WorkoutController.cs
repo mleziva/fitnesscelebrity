@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FitnessCelebrity.Web.Extensions;
 using FitnessCelebrity.Web.Models;
 using FitnessCelebrity.Web.Models.Dto;
 using FitnessCelebrity.Web.Repositories;
@@ -41,7 +42,8 @@ namespace FitnessCelebrity.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> PostAsync([FromBody] WorkoutDtoCreate workout)
         {
-            var workoutEntity = mapper.Map<Workout>(workout);
+            //call service to get userID
+            var workoutEntity = mapper.Map<Workout>(workout, opt => {opt.Items["UserId"] = User.Identity.GetId(); });
             await workoutRepository.Create(workoutEntity);
             return Ok();
         }
