@@ -15,6 +15,9 @@ using Microsoft.OpenApi.Models;
 using FitnessCelebrity.Web.Repositories;
 using FitnessCelebrity.Web.Extensions;
 using AutoMapper;
+using System.Collections.Generic;
+using IdentityServer4.Models;
+using IdentityServer4;
 
 namespace FitnessCelebrity.Web
 {
@@ -37,9 +40,16 @@ namespace FitnessCelebrity.Web
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
+
+#if DEBUG
+            services.AddIdentityServer()
+                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
+                .AddInMemoryClients(RegisterDebugClient());
+#else
+                services.AddIdentityServer()
+                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+#endif
             services.AddAuthentication()
                 .AddIdentityServerJwt();
 
@@ -150,6 +160,21 @@ namespace FitnessCelebrity.Web
 };
                 c.AddSecurityRequirement(securityRequirements);
             });
+        }
+
+        private List<Client> RegisterDebugClient()
+        {
+            var clients = new List<Client>
+            {
+                new Client
+                {
+                    ClientId = "testaccount",
+                    ClientSecrets = new [] { new Secret("testingsecret".Sha512()) },
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile, "FitnessCelebrity.WebAPI" }
+                }
+            };
+            return clients;
         }
     }
 }
