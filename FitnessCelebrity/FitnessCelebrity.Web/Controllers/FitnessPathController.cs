@@ -29,9 +29,9 @@ namespace FitnessCelebrity.Web.Controllers
         /// <returns></returns>
         [Route("/user/list")]
         [HttpGet]
-        public async Task<IEnumerable<FitnessPath>> Get(string userId)
+        public async Task<IEnumerable<FitnessPath>> Get([FromQuery(Name ="")]PageableUserIdRequest request)
         {
-            var paths = await fitnessPathRepository.ListUserCreatedFitnessPaths(userId);
+            var paths = await fitnessPathRepository.ListUserCreatedFitnessPaths(request);
             return paths;
         }
         // GET: api/FitnessPath

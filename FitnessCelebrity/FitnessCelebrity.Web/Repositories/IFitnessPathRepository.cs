@@ -1,4 +1,6 @@
-﻿using FitnessCelebrity.Web.Models;
+﻿using FitnessCelebrity.Web.Data;
+using FitnessCelebrity.Web.Models;
+using FitnessCelebrity.Web.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,6 @@ namespace FitnessCelebrity.Web.Repositories
 {
     public interface IFitnessPathRepository : IBaseRepository<FitnessPath>
     {
-        Task<IEnumerable<FitnessPath>> ListUserCreatedFitnessPaths(string userId);
+        Task<PagingList<FitnessPath>> ListUserCreatedFitnessPaths(PageableUserIdRequest request);
     }
 }
