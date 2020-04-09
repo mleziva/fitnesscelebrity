@@ -55,6 +55,7 @@ namespace FitnessCelebrity.Web
             AddSwagger(services);
 
             services.AddScoped<IWorkoutRepository, WorkoutRepository>();
+            services.AddScoped<IFitnessPathRepository, FitnessPathRepository>();
 
             services.AddAutoMapper(typeof(Startup));
 
