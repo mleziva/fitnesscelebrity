@@ -50,7 +50,7 @@ export class FitnessPathSelectOrCreate extends Component {
             pathsDisplay = <Dropdown options={this.state.existingPaths} />
         }
         if (displayNewPathForm) {
-            pathsDisplay = <FitnessPathForm/>
+            pathsDisplay = <FitnessPathForm fitnessPathObj={this.props.fitnessPathObj} fitnessPathFormChange={this.props.fitnessPathFormChange}/>
         }
       
         return (

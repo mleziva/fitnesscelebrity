@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import authService from '../api-authorization/AuthorizeService'
 import {MovementSelectOrCreate} from './MovementSelectOrCreate'
 import {FitnessPathSelectOrCreate} from './FitnessPathSelectOrCreate'
 import WorkoutJson from './models/workout'
+import WorkoutService from '../../services/workoutService'
 
 export class CreatePage extends Component {
     static displayName = CreatePage.name;
 
     constructor(props) {
         super(props);
-        this.state = {workoutJson: WorkoutJson };
+        this.state = {workoutJson: WorkoutJson, fitnessPathObj: {name: "", description: "", category: "youtube" } };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -24,13 +24,14 @@ export class CreatePage extends Component {
                    [name]: value
                   }
        });
+       console.log(JSON.stringify(this.state.workoutJson))
     }
 
     async handleSubmit(event) {
         //validate whatever
         event.preventDefault();
-        console.log(JSON.stringify(this.state.workoutJson))
-        await this.postWorkout();
+        const workoutJson = { ...this.state.workoutJson, ["fitnessPathWorkouts"]: [{"fitnessPath": this.state.fitnessPathObj}] }
+        await WorkoutService.createWorkout(workoutJson);
     }
     fitnessPathSelect = (fitnessPathid) => {
         let fpobj = {};
@@ -40,12 +41,21 @@ export class CreatePage extends Component {
         const workoutJson = { ...this.state.workoutJson, ["fitnessPathWorkouts"]: fitnessPathWorkouts }
         this.setState(() => ({ workoutJson }))
     }
+    fitnessPathFormChange = (fitnessPathObj) => {
+        //copy state into local state
+        this.setState(() => ({ fitnessPathObj }))
+        console.log(JSON.stringify(fitnessPathObj))
+
+    }
 
     render() {
         return (
             <div>
                 <h1>Create a new workout</h1>
-                    <FitnessPathSelectOrCreate onFitnessPathSelect={this.fitnessPathSelect}></FitnessPathSelectOrCreate>
+                    <FitnessPathSelectOrCreate 
+                    onFitnessPathSelect={this.fitnessPathSelect} 
+                    fitnessPathObj={this.state.fitnessPathObj}
+                    fitnessPathFormChange={this.fitnessPathFormChange}/>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="inputName">Workout name</label>
@@ -76,18 +86,5 @@ export class CreatePage extends Component {
             </div>
 
         );
-    }
-    async postWorkout() {
-        const token = await authService.getAccessToken();
-        const response = await fetch('/api/workout', {
-            method: 'POST',
-			body: JSON.stringify(this.state.workoutJson),
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        //do some error handling/logging
-        const data = await response.json();
     }
 }
