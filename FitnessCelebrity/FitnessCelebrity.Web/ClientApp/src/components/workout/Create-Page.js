@@ -32,12 +32,20 @@ export class CreatePage extends Component {
         console.log(JSON.stringify(this.state.workoutJson))
         await this.postWorkout();
     }
+    fitnessPathSelect = (fitnessPathid) => {
+        let fpobj = {};
+        fpobj["fitnessPathid"]=fitnessPathid;
+        let fitnessPathWorkouts = [fpobj];
+        console.log(JSON.stringify(fitnessPathWorkouts));
+        const workoutJson = { ...this.state.workoutJson, ["fitnessPathWorkouts"]: fitnessPathWorkouts }
+        this.setState(() => ({ workoutJson }))
+    }
 
     render() {
         return (
             <div>
                 <h1>Create a new workout</h1>
-                    <FitnessPathSelectOrCreate></FitnessPathSelectOrCreate>
+                    <FitnessPathSelectOrCreate onFitnessPathSelect={this.fitnessPathSelect}></FitnessPathSelectOrCreate>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="inputName">Workout name</label>
@@ -79,7 +87,7 @@ export class CreatePage extends Component {
                 'Authorization': `Bearer ${token}`
             }
         });
+        //do some error handling/logging
         const data = await response.json();
-        alert('response: ' + JSON.stringify(data));
     }
 }

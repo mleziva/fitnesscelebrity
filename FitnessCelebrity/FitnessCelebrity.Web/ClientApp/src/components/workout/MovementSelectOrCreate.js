@@ -32,7 +32,7 @@ export class MovementSelectOrCreate extends Component {
     const displayExistingMovements = this.state.displayExistingMovements;
     const displayNewMovementForm = this.state.displayNewMovementForm;
     const Dropdown = ({ options }) =>
-        <select>
+        <select className="form-control" id="fitnessPathId" name="fitnessPathId" >
             {options.map((e, i) => <option key={i}>{e}</option>)}
         </select>
         ;

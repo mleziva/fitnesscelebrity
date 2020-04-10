@@ -7,7 +7,7 @@ export class FitnessPathSelectOrCreate extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {displayExistingPaths: false, displayNewPathForm: false, existingPaths: [] };
+        this.state = {displayExistingPaths: false, displayNewPathForm: false, existingPaths: [], selectedId : ""};
         this.displayExistingPaths = this.displayExistingPaths.bind(this);
         this.displayNewPathForm = this.displayNewPathForm.bind(this);
     }
@@ -16,7 +16,7 @@ export class FitnessPathSelectOrCreate extends Component {
         let showPaths = this.state.displayExistingPaths
         if (!showPaths) {
             var paths = await FitnessPathService.listUserFitnessPaths();
-            this.setState({ existingPaths: paths.map(c => c.name)});
+            this.setState({ existingPaths: paths.map(c => ({name: c.name, id: c.id}))});
         }
         this.setState({
             displayExistingPaths: !showPaths,
@@ -30,28 +30,44 @@ export class FitnessPathSelectOrCreate extends Component {
         });
     }
 
+    fitnessPathSelect = (e) => {
+        let selectlist = e.target;
+        this.setState({selectedId : selectlist.value})
+        this.props.onFitnessPathSelect(selectlist.value);
+      }
+
+
     render() {
         const displayExistingPaths = this.state.displayExistingPaths;
         const displayNewPathForm = this.state.displayNewPathForm;
         const Dropdown = ({ options }) =>
-            <select>
-                {options.map((e, i) => <option key={i}>{e}</option>)}
+            <select className="form-control" id="fitnessPathId" name="fitnessPathId" value={this.state.selectedId} onChange={this.fitnessPathSelect}>
+                {options.map((e,i) => <option key={i} value={e.id}>{e.name}</option>)}
             </select>
             ;
         let pathsDisplay;
         if (displayExistingPaths) {
-            pathsDisplay = <p><Dropdown options={this.state.existingPaths} /></p>
+            pathsDisplay = <Dropdown options={this.state.existingPaths} />
         }
         if (displayNewPathForm) {
-            pathsDisplay = <p><FitnessPathForm/></p>
+            pathsDisplay = <FitnessPathForm/>
         }
       
         return (
             <div>
                 <p>Fitness Path</p>
-                <button className='btn' onClick={this.displayExistingPaths}>Add this workout to an existing fitness path</button>
-                <button className='btn' onClick={this.displayNewPathForm}>Create new fitness path</button>
-                {pathsDisplay}
+                <div className="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label className="btn btn-secondary">
+                        <input type="radio" name="options" id="option1" onClick={this.displayExistingPaths}/>Add this workout to an existing fitness path
+                    </label>
+                    <label className="btn btn-secondary">
+                        <input type="radio" name="options" id="option2" onClick={this.displayNewPathForm}/>Create new fitness path
+                    </label>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="category">Fitness Path:</label>
+                    {pathsDisplay}
+                </div>
             </div>
         );
     }
