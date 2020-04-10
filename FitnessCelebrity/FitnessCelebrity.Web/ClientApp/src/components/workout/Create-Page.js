@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import authService from '../api-authorization/AuthorizeService'
-import FitnessPathForm from './FitnessPathForm'
 import {MovementSelectOrCreate} from './MovementSelectOrCreate'
+import {FitnessPathSelectOrCreate} from './FitnessPathSelectOrCreate'
 import WorkoutJson from './models/workout'
 
 export class CreatePage extends Component {
@@ -9,11 +9,9 @@ export class CreatePage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {workoutJson: WorkoutJson, displayExistingPaths: false, displayNewPathForm: false, existingPaths: [] };
+        this.state = {workoutJson: WorkoutJson };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.displayExistingPaths = this.displayExistingPaths.bind(this);
-        this.displayNewPathForm = this.displayNewPathForm.bind(this);
     }
 
     handleInputChange(event) {
@@ -36,30 +34,10 @@ export class CreatePage extends Component {
     }
 
     render() {
-        const displayExistingPaths = this.state.displayExistingPaths;
-        const displayNewPathForm = this.state.displayNewPathForm;
-        const Dropdown = ({ options }) =>
-            <select>
-                {options.map((e, i) => <option key={i}>{e}</option>)}
-            </select>
-            ;
-        let pathsDisplay;
-        if (displayExistingPaths) {
-            pathsDisplay = <p><Dropdown options={this.state.existingPaths} /></p>
-        }
-        if (displayNewPathForm) {
-            pathsDisplay = <p><FitnessPathForm/></p>
-        }
-      
-
         return (
             <div>
                 <h1>Create a new workout</h1>
-
-                <p>Fitness Path</p>
-                <button className='btn' onClick={this.displayExistingPaths}>Add this workout to an existing fitness path</button>
-                <button className='btn' onClick={this.displayNewPathForm}>Create new fitness path</button>
-                {pathsDisplay}
+                    <FitnessPathSelectOrCreate></FitnessPathSelectOrCreate>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="inputName">Workout name</label>
@@ -84,29 +62,12 @@ export class CreatePage extends Component {
                             <option value="text/other">Other</option>
                         </select>
                     </div>
-<MovementSelectOrCreate></MovementSelectOrCreate>
+                        <MovementSelectOrCreate></MovementSelectOrCreate>
                     <input type="submit" className="btn btn-primary" value="Submit" />
                 </form>
             </div>
 
         );
-    }
-    displayExistingPaths() {
-        let showPaths = this.state.displayExistingPaths
-        if (!showPaths) {
-            //load data from API
-            this.setState({ existingPaths: ["Grass", "Poison", "Fire", "Flying", "Dragon"]});
-        }
-        this.setState({
-            displayExistingPaths: !showPaths,
-            displayNewPathForm: false
-        });
-    }
-    displayNewPathForm() {
-        this.setState({
-            displayExistingPaths: false,
-            displayNewPathForm: !this.state.displayNewPathForm
-        });
     }
     async postWorkout() {
         const token = await authService.getAccessToken();
@@ -120,14 +81,5 @@ export class CreatePage extends Component {
         });
         const data = await response.json();
         alert('response: ' + JSON.stringify(data));
-    }
-
-    async getExistingPaths() {
-        const token = await authService.getAccessToken();
-        const response = await fetch('weatherforecast', {
-            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
-        });
-        const data = await response.json();
-        this.setState({ forecasts: data, loading: false });
     }
 }

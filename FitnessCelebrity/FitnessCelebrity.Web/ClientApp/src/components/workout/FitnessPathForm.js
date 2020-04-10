@@ -2,6 +2,7 @@ import React from "react";
 import '../../custom.css';
 
 const FitnessPathForm = () => (
+    <div className="col-md-8">
     <div className="row pathformdiv">
         <div className="col-md-6 offset-md-3">
         <form>
@@ -27,6 +28,7 @@ const FitnessPathForm = () => (
             </div>
             </form>
         </div>
+    </div>
     </div>
 );
 

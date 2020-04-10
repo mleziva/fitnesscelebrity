@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FitnessCelebrity.Web.Extensions;
 using FitnessCelebrity.Web.Models;
 using FitnessCelebrity.Web.Models.Dto;
 using FitnessCelebrity.Web.Repositories;
@@ -25,12 +26,14 @@ namespace FitnessCelebrity.Web.Controllers
         }
         /// <summary>
         /// Only the names of fitness paths returned for user
+        /// If user id is not supplied, returns paths of current user
         /// </summary>
         /// <returns></returns>
-        [Route("/user/list")]
+        [Route("user/list")]
         [HttpGet]
         public async Task<IEnumerable<FitnessPath>> Get([FromQuery(Name ="")]PageableUserIdRequest request)
         {
+            if (request.UserId == null) request.UserId = User.Identity.GetId();
             var paths = await fitnessPathRepository.ListUserCreatedFitnessPaths(request);
             return paths;
         }

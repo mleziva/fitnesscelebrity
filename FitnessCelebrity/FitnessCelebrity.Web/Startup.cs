@@ -155,9 +155,9 @@ namespace FitnessCelebrity.Web
                     }
                 };
                 OpenApiSecurityRequirement securityRequirements = new OpenApiSecurityRequirement()
-{
-    {securityScheme, new string[] { }},
-};
+                {
+                    {securityScheme, new string[] { }},
+                };
                 c.AddSecurityRequirement(securityRequirements);
             });
         }
@@ -171,6 +171,20 @@ namespace FitnessCelebrity.Web
                     ClientId = "testaccount",
                     ClientSecrets = new [] { new Secret("testingsecret".Sha512()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile, "FitnessCelebrity.WebAPI" }
+                },
+                new Client
+                {
+                    ClientId = "FitnessCelebrity.Web",
+                    ClientName = "React App Client",
+                    RequireConsent = false,
+                    RequirePkce = true,
+                    RequireClientSecret = false,
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = { "https://localhost:44362/authentication/login-callback" },
+                    PostLogoutRedirectUris = { "https://localhost:44362/authentication/logout-callback" },
+                    AllowedCorsOrigins = { "https://localhost:44362" },
+                    AllowedGrantTypes = GrantTypes.Code,
                     AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile, "FitnessCelebrity.WebAPI" }
                 }
             };
