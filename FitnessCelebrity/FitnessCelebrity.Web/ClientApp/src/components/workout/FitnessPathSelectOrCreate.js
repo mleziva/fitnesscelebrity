@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FitnessPathForm from './FitnessPathForm'
-import FitnessPathService from './services/FitnessPathService'
+import FitnessPathService from '../../services/FitnessPathService'
 
 export class FitnessPathSelectOrCreate extends Component {
     static displayName = FitnessPathSelectOrCreate.name;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {MovementSelectOrCreate} from './MovementSelectOrCreate'
 import {FitnessPathSelectOrCreate} from './FitnessPathSelectOrCreate'
 import WorkoutJson from './models/workout'
-import WorkoutService from '../../services/workoutService'
+import WorkoutService from '../../services/WorkoutService'
 
 export class CreatePage extends Component {
     static displayName = CreatePage.name;
