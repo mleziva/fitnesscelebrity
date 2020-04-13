@@ -85,6 +85,16 @@ namespace FitnessCelebrity.Web.Data
            .WithOne(g => g.UserProfile)
            .HasForeignKey<UserProfile>(s => s.ApplicationUserId);
 
+            modelBuilder.Entity<UserProfile>()
+            .HasOne<ApplicationUser>(s => s.CreatedByUser)
+            .WithMany(g => g.CreatedUserProfiles)
+            .HasForeignKey(s => s.CreatedById);
+
+            modelBuilder.Entity<UserProfile>()
+            .HasOne<ApplicationUser>(s => s.ModifiedByUser)
+            .WithMany(g => g.ModifiedUserProfiles)
+            .HasForeignKey(s => s.ModifiedById);
+
             //add subscriptions relationships many:many
             modelBuilder.Entity<SubscribedFitnessPaths>().HasKey(sc => new { sc.ApplicationUserId, sc.FitnessPathId });
             modelBuilder.Entity<SubscribedUsers>().HasKey(sc => new { sc.ApplicationUserId, sc.UserProfileId });
