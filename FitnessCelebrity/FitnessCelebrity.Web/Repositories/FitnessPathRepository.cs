@@ -31,7 +31,15 @@ namespace FitnessCelebrity.Web.Repositories
         {
             return await GetAll()
                 .Include(i => i.FitnessPathWorkouts)
+                .Include(i => i.CreatedByUser)
+                .ThenInclude(i => i.UserProfile)
                 .FirstOrDefaultAsync(e => e.Id == id);
+        }
+
+        public async Task<PagingList<FitnessPath>> SearchFitnessPaths(PageableQueryRequest request)
+        {
+            return await PagingList<FitnessPath>.CreateAsync(GetAll()
+                .Where(x => x.Tags.Contains(request.Query)), request.Page, request.Size);
         }
     }
 }

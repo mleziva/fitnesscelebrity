@@ -46,14 +46,14 @@ namespace FitnessCelebrity.Web.Controllers
 
         // GET: api/FitnessPath/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<FitnessPathDtoGet>> GetAsync(int id)
+        public async Task<ActionResult<FitnessPath>> GetAsync(int id)
         {
             var path = await fitnessPathRepository.GetById(id);
             if (path == null)
                 return NotFound();
 
-            var fitnessPath = mapper.Map<FitnessPathDtoGet>(path);
-            return Ok(fitnessPath);
+            //var fitnessPath = mapper.Map<FitnessPathDtoGet>(path);
+            return Ok(path);
         }
 
         // POST: api/FitnessPath
@@ -72,6 +72,14 @@ namespace FitnessCelebrity.Web.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        [Route("search")]
+        [HttpGet]
+        public async Task<IEnumerable<FitnessPath>> Search([FromQuery(Name = "")]PageableQueryRequest request)
+        {
+            var paths = await fitnessPathRepository.SearchFitnessPaths(request);
+            return paths;
         }
     }
 }

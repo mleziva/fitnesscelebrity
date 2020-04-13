@@ -18,6 +18,15 @@ export class FitnessPathDetails extends Component {
     return (
         <div>
             <h4><span className="badge badge-secondary">Name </span>{fitnessPath.name}</h4>
+            <h4><span className="badge badge-secondary">Description </span>{fitnessPath.description}</h4>
+            <h4><span className="badge badge-secondary">Tags </span>{fitnessPath.tags}</h4>
+            <h3>Workouts</h3>
+
+          {fitnessPath.fitnessPathWorkouts.map(workout =>
+          <ul>
+            <li><a href="{workout.id}">{workout.id}</a></li>
+          </ul>
+          )}
         </div>
 
     );

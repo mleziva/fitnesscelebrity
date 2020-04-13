@@ -28,6 +28,19 @@ export class FitnessPathService {
         });
         return await response.json();
     }
+
+    async search(query) {
+        const url = FitnessPathRoutes.Search +"?query=" + query;
+        const token = await authService.getAccessToken();
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return await response.json();
+    }
 }
 
 const fpService = new FitnessPathService();

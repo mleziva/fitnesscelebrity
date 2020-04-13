@@ -11,6 +11,11 @@ namespace FitnessCelebrity.Web.Models.Dto
         public string Category { get; set; }
         public string CreatedByUserName { get; set; }
         public string CreatedById { get; set; }
-        public IList<long> WorkoutIds { get; set; }
+        public IList<FitnessPathDtoGetWorkouts> Workout { get; set; }
+    }
+    public class FitnessPathDtoGetWorkouts
+    {
+        public string Name { get; set; }
+        public long Id { get; set; }
     }
 }

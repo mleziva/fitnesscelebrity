@@ -31,7 +31,7 @@ namespace FitnessCelebrity.Web.Models.Dto
 
             CreateMap<FitnessPath, FitnessPathDtoGet>()
                 .ForMember(x => x.CreatedByUserName, opt => opt.MapFrom(src => src.CreatedById))
-                .ForMember(x => x.WorkoutIds, opt => opt.MapFrom(src => src.FitnessPathWorkouts.Select(w=>w.WorkoutId)));
+                .ForMember(x => x.Workout, opt => opt.MapFrom(src => src.FitnessPathWorkouts.Select(w=>w.WorkoutId)));
 
         }
     }

@@ -11,5 +11,6 @@ namespace FitnessCelebrity.Web.Repositories
     public interface IFitnessPathRepository : IBaseRepository<FitnessPath>
     {
         Task<PagingList<FitnessPath>> ListUserCreatedFitnessPaths(PageableUserIdRequest request);
+        Task<PagingList<FitnessPath>> SearchFitnessPaths(PageableQueryRequest request);
     }
 }
