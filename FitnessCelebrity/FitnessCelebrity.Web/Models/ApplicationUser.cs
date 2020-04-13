@@ -18,5 +18,9 @@ namespace FitnessCelebrity.Web.Models
 
         public virtual UserProfile UserProfile { get; set; }
 
+        public virtual IList<SubscribedFitnessPaths> SubscribedFitnessPaths { get; set; }
+        public virtual IList<SubscribedUsers> SubscribedUsers { get; set; }
+        public virtual IList<SubscribedWorkouts> SubscribedWorkouts { get; set; }
+
     }
 }

@@ -9,5 +9,6 @@ namespace FitnessCelebrity.Web.Models
     {
         public string Category { get; set; }
         public virtual IEnumerable<FitnessPathWorkout> FitnessPathWorkouts { get; set; }
+        public virtual IEnumerable<SubscribedFitnessPaths> Subscriptions { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace FitnessCelebrity.Web.Models
     {
         public long ApplicationUserId { get; set; }
         public long UserProfileId { get; set; }
-        public virtual ApplicationException ApplicationUser { get; set; }
-        public virtual UserProfile UserProfiles { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
     }
 }
