@@ -18,6 +18,7 @@ using AutoMapper;
 using System.Collections.Generic;
 using IdentityServer4.Models;
 using IdentityServer4;
+using FitnessCelebrity.Web.Services;
 
 namespace FitnessCelebrity.Web
 {
@@ -66,6 +67,9 @@ namespace FitnessCelebrity.Web
 
             services.AddScoped<IWorkoutRepository, WorkoutRepository>();
             services.AddScoped<IFitnessPathRepository, FitnessPathRepository>();
+            services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IConfigurationService, ConfigurationService>();
+            services.AddScoped<IControllerService, ControllerService>();
 
             services.AddAutoMapper(typeof(Startup));
 

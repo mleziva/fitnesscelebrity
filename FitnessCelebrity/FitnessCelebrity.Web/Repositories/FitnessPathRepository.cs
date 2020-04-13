@@ -11,11 +11,9 @@ namespace FitnessCelebrity.Web.Repositories
 {
     public class FitnessPathRepository : BaseRepository<FitnessPath>, IFitnessPathRepository
     {
-        private readonly ApplicationDbContext dbContext;
         public FitnessPathRepository(ApplicationDbContext dbContext)
       : base(dbContext)
         {
-            this.dbContext = dbContext;
         }
 
         public async Task<PagingList<FitnessPath>> ListUserCreatedFitnessPaths(PageableUserIdRequest request)
@@ -31,8 +29,8 @@ namespace FitnessCelebrity.Web.Repositories
         {
             return await GetAll()
                 .Include(i => i.FitnessPathWorkouts)
-                .Include(i => i.CreatedByUser)
-                .ThenInclude(i => i.UserProfile)
+                .ThenInclude(i=>i.Workout)
+                .Include(i => i.CreatedByUser.UserProfile)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 

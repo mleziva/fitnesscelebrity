@@ -31,7 +31,7 @@ namespace FitnessCelebrity.Web.Controllers
         /// <returns></returns>
         [Route("user/list")]
         [HttpGet]
-        public async Task<IEnumerable<FitnessPath>> Get([FromQuery(Name ="")]PageableUserIdRequest request)
+        public async Task<IEnumerable<FitnessPath>> Get([FromQuery(Name = "")]PageableUserIdRequest request)
         {
             if (request.UserId == null) request.UserId = User.Identity.GetId();
             var paths = await fitnessPathRepository.ListUserCreatedFitnessPaths(request);
@@ -52,8 +52,8 @@ namespace FitnessCelebrity.Web.Controllers
             if (path == null)
                 return NotFound();
 
-            //var fitnessPath = mapper.Map<FitnessPathDtoGet>(path);
-            return Ok(path);
+            var fitnessPath = mapper.Map<FitnessPathDtoGet>(path);
+            return Ok(fitnessPath);
         }
 
         // POST: api/FitnessPath

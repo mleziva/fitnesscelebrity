@@ -5,6 +5,7 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { CreatePage } from './components/workout/Create-Page';
 import { FitnessPathDetails } from './components/fitnesspath/FitnessPathDetails';
+import { ProfilePage } from './components/profile/profilepage';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
@@ -20,6 +21,7 @@ export default class App extends Component {
         <Route exact path='/' component={Home} />
             <Route path='/workout/create' component={CreatePage} />
             <Route path='/fitnessPath/:fitnessPathId' component={FitnessPathDetails} />
+            <Route path='/profile/:profileUserName' component={ProfilePage} />
         <AuthorizeRoute path='/fetch-data' component={FetchData} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>

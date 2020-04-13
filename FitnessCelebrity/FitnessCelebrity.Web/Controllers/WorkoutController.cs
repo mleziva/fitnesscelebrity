@@ -7,6 +7,7 @@ using FitnessCelebrity.Web.Extensions;
 using FitnessCelebrity.Web.Models;
 using FitnessCelebrity.Web.Models.Dto;
 using FitnessCelebrity.Web.Repositories;
+using FitnessCelebrity.Web.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +18,15 @@ namespace FitnessCelebrity.Web.Controllers
     [ApiController]
     public class WorkoutController : ControllerBase
     {
+        private readonly string controllerName = "workout";
         private readonly IMapper mapper;
+        private readonly IConfigurationService configService;
         private readonly IWorkoutRepository workoutRepository;
-        public WorkoutController(IWorkoutRepository workoutRepository, IMapper mapper)
+        public WorkoutController(IWorkoutRepository workoutRepository, IControllerService controllerService)
         {
             this.workoutRepository = workoutRepository;
-            this.mapper = mapper;
+            mapper = controllerService.Mapper;
+            configService = controllerService.ConfigurationService;
         }
         // GET: api/Workout
         [HttpGet]
@@ -33,19 +37,22 @@ namespace FitnessCelebrity.Web.Controllers
 
         // GET: api/Workout/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult> GetAsync(int id)
         {
-            return "value";
+            var workout = await workoutRepository.GetById(id);
+            if (workout == null)
+                return NotFound();
+
+            return Ok(workout);
         }
 
         // POST: api/Workout
         [HttpPost]
         public async Task<ActionResult> PostAsync([FromBody] WorkoutDtoCreate workout)
         {
-            //call service to get userID
             var workoutEntity = mapper.Map<Workout>(workout, opt => {opt.Items["UserId"] = User.Identity.GetId(); });
-            await workoutRepository.Create(workoutEntity);
-            return Ok();
+            var createdWorkout = await workoutRepository.Create(workoutEntity);
+            return Created(configService.GenerateCreatedUrl(controllerName, createdWorkout.Id), createdWorkout);
         }
 
         // PUT: api/Workout/5

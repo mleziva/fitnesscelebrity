@@ -13,7 +13,7 @@ namespace FitnessCelebrity.Web.Repositories
 
         Task<TEntity> GetById(int id);
 
-        Task Create(TEntity entity);
+        Task<TEntity> Create(TEntity entity);
 
         Task Update(int id, TEntity entity);
 

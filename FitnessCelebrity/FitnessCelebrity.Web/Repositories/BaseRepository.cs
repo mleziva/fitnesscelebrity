@@ -15,10 +15,11 @@ namespace FitnessCelebrity.Web.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task Create(TEntity entity)
+        public async Task<TEntity> Create(TEntity entity)
         {
             await _dbContext.Set<TEntity>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
+            return entity;
         }
 
         public async Task Delete(int id)
