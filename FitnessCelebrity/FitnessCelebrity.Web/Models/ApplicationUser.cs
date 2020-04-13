@@ -16,5 +16,7 @@ namespace FitnessCelebrity.Web.Models
         public virtual IList<Workout> ModifiedWorkouts { get; set; }
         public virtual IList<Movement> ModifiedMovements { get; set; }
 
+        public virtual UserProfile UserProfile { get; set; }
+
     }
 }
