@@ -46,9 +46,14 @@ namespace FitnessCelebrity.Web.Controllers
 
         // GET: api/FitnessPath/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<FitnessPathDtoGet>> GetAsync(int id)
         {
-            return "value";
+            var path = await fitnessPathRepository.GetById(id);
+            if (path == null)
+                return NotFound();
+
+            var fitnessPath = mapper.Map<FitnessPathDtoGet>(path);
+            return Ok(fitnessPath);
         }
 
         // POST: api/FitnessPath

@@ -28,6 +28,11 @@ namespace FitnessCelebrity.Web.Models.Dto
                 .ForMember(d => d.ModifiedById, opt => opt.MapFrom((src, dst, _, context) => context.Options.Items["UserId"]));
             CreateMap<FitnessPathWorkoutDtoCreate, FitnessPathWorkout>();
             CreateMap<WorkoutMovementDtoCreate, WorkoutMovement>();
+
+            CreateMap<FitnessPath, FitnessPathDtoGet>()
+                .ForMember(x => x.CreatedByUserName, opt => opt.MapFrom(src => src.CreatedById))
+                .ForMember(x => x.WorkoutIds, opt => opt.MapFrom(src => src.FitnessPathWorkouts.Select(w=>w.WorkoutId)));
+
         }
     }
 }
