@@ -14,6 +14,6 @@ namespace FitnessCelebrity.Web.Repositories
         Task<PagingList<FitnessPath>> SearchFitnessPaths(PageableQueryRequest request);
         Task<PagingList<UserProfile>> GetSubscribedUsers(PageableIdRequest request);
         Task<PagingList<FitnessPath>> GetSubscribedPaths(PageableUserIdRequest request);
-        Task<SubscribedFitnessPaths> CreateSubscription(SubscribedFitnessPaths subscribedFitnessPath);
+        Task<FitnessPathSubscription> CreateSubscription(FitnessPathSubscription subscribedFitnessPath);
     }
 }

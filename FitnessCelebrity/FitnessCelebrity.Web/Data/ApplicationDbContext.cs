@@ -85,47 +85,34 @@ namespace FitnessCelebrity.Web.Data
            .WithOne(g => g.UserProfile)
            .HasForeignKey<UserProfile>(s => s.ApplicationUserId);
 
-            modelBuilder.Entity<UserProfile>()
-            .HasOne<ApplicationUser>(s => s.CreatedByUser)
-            .WithMany(g => g.CreatedUserProfiles)
-            .HasForeignKey(s => s.CreatedById);
-
-            modelBuilder.Entity<UserProfile>()
-            .HasOne<ApplicationUser>(s => s.ModifiedByUser)
-            .WithMany(g => g.ModifiedUserProfiles)
-            .HasForeignKey(s => s.ModifiedById);
-
             //add subscriptions relationships many:many
-            modelBuilder.Entity<SubscribedFitnessPaths>().HasKey(sc => new { sc.ApplicationUserId, sc.FitnessPathId });
-            modelBuilder.Entity<SubscribedUsers>().HasKey(sc => new { sc.ApplicationUserId, sc.UserProfileId });
-            modelBuilder.Entity<SubscribedWorkouts>().HasKey(sc => new { sc.ApplicationUserId, sc.WorkoutId });
 
-            modelBuilder.Entity<SubscribedFitnessPaths>()
+            modelBuilder.Entity<FitnessPathSubscription>()
             .HasOne<ApplicationUser>(sc => sc.ApplicationUser)
-            .WithMany(s => s.SubscribedFitnessPaths)
+            .WithMany(s => s.FitnessPathSubscriptions)
             .HasForeignKey(sc => sc.ApplicationUserId);
 
-            modelBuilder.Entity<SubscribedFitnessPaths>()
+            modelBuilder.Entity<FitnessPathSubscription>()
             .HasOne<FitnessPath>(sc => sc.FitnessPath)
             .WithMany(s => s.Subscriptions)
             .HasForeignKey(sc => sc.FitnessPathId);
 
-            modelBuilder.Entity<SubscribedUsers>()
+            modelBuilder.Entity<UserSubscription>()
             .HasOne<ApplicationUser>(sc => sc.ApplicationUser)
-            .WithMany(s => s.SubscribedUsers)
+            .WithMany(s => s.UserSubscriptions)
             .HasForeignKey(sc => sc.ApplicationUserId);
 
-            modelBuilder.Entity<SubscribedUsers>()
+            modelBuilder.Entity<UserSubscription>()
             .HasOne<UserProfile>(sc => sc.UserProfile)
             .WithMany(s => s.Subscriptions)
             .HasForeignKey(sc => sc.UserProfileId);
 
-            modelBuilder.Entity<SubscribedWorkouts>()
+            modelBuilder.Entity<WorkoutSubscription>()
            .HasOne<ApplicationUser>(sc => sc.ApplicationUser)
-           .WithMany(s => s.SubscribedWorkouts)
+           .WithMany(s => s.WorkoutSubscriptions)
            .HasForeignKey(sc => sc.ApplicationUserId);
 
-            modelBuilder.Entity<SubscribedWorkouts>()
+            modelBuilder.Entity<WorkoutSubscription>()
             .HasOne<Workout>(sc => sc.Workout)
             .WithMany(s => s.Subscriptions)
             .HasForeignKey(sc => sc.WorkoutId);

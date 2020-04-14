@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace FitnessCelebrity.Web.Models
 {
-    public class SubscribedUsers
+    public class WorkoutSubscription : BaseModel
     {
         public string ApplicationUserId { get; set; }
-        public long UserProfileId { get; set; }
+        public long WorkoutId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
-        public virtual UserProfile UserProfile { get; set; }
+        public Workout Workout { get; set; }
     }
 }

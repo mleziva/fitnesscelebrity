@@ -4,14 +4,16 @@ using FitnessCelebrity.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FitnessCelebrity.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200414144637_renamesubscriptions")]
+    partial class renamesubscriptions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,20 +134,13 @@ namespace FitnessCelebrity.Web.Migrations
 
             modelBuilder.Entity("FitnessCelebrity.Web.Models.FitnessPathSubscription", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<long>("FitnessPathId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
+                    b.HasKey("ApplicationUserId", "FitnessPathId");
 
                     b.HasIndex("FitnessPathId");
 
@@ -223,14 +218,11 @@ namespace FitnessCelebrity.Web.Migrations
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ApplicationUserId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ApplicationUserId2")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Bio")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTimeOffset>("CreatedDate")
                         .HasColumnType("datetimeoffset");
@@ -243,6 +235,9 @@ namespace FitnessCelebrity.Web.Migrations
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedById")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTimeOffset>("ModifiedDate")
                         .HasColumnType("datetimeoffset");
@@ -259,29 +254,22 @@ namespace FitnessCelebrity.Web.Migrations
                         .IsUnique()
                         .HasFilter("[ApplicationUserId] IS NOT NULL");
 
-                    b.HasIndex("ApplicationUserId1");
+                    b.HasIndex("CreatedById");
 
-                    b.HasIndex("ApplicationUserId2");
+                    b.HasIndex("ModifiedById");
 
                     b.ToTable("UserProfile");
                 });
 
             modelBuilder.Entity("FitnessCelebrity.Web.Models.UserSubscription", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<long>("UserProfileId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
+                    b.HasKey("ApplicationUserId", "UserProfileId");
 
                     b.HasIndex("UserProfileId");
 
@@ -351,20 +339,13 @@ namespace FitnessCelebrity.Web.Migrations
 
             modelBuilder.Entity("FitnessCelebrity.Web.Models.WorkoutSubscription", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<long>("WorkoutId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
+                    b.HasKey("ApplicationUserId", "WorkoutId");
 
                     b.HasIndex("WorkoutId");
 
@@ -603,7 +584,9 @@ namespace FitnessCelebrity.Web.Migrations
                 {
                     b.HasOne("FitnessCelebrity.Web.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("FitnessPathSubscriptions")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FitnessCelebrity.Web.Models.FitnessPath", "FitnessPath")
                         .WithMany("Subscriptions")
@@ -644,20 +627,22 @@ namespace FitnessCelebrity.Web.Migrations
                         .WithOne("UserProfile")
                         .HasForeignKey("FitnessCelebrity.Web.Models.UserProfile", "ApplicationUserId");
 
-                    b.HasOne("FitnessCelebrity.Web.Models.ApplicationUser", null)
+                    b.HasOne("FitnessCelebrity.Web.Models.ApplicationUser", "CreatedByUser")
                         .WithMany("CreatedUserProfiles")
-                        .HasForeignKey("ApplicationUserId1");
+                        .HasForeignKey("CreatedById");
 
-                    b.HasOne("FitnessCelebrity.Web.Models.ApplicationUser", null)
+                    b.HasOne("FitnessCelebrity.Web.Models.ApplicationUser", "ModifiedByUser")
                         .WithMany("ModifiedUserProfiles")
-                        .HasForeignKey("ApplicationUserId2");
+                        .HasForeignKey("ModifiedById");
                 });
 
             modelBuilder.Entity("FitnessCelebrity.Web.Models.UserSubscription", b =>
                 {
                     b.HasOne("FitnessCelebrity.Web.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("UserSubscriptions")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FitnessCelebrity.Web.Models.UserProfile", "UserProfile")
                         .WithMany("Subscriptions")
@@ -696,7 +681,9 @@ namespace FitnessCelebrity.Web.Migrations
                 {
                     b.HasOne("FitnessCelebrity.Web.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("WorkoutSubscriptions")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FitnessCelebrity.Web.Models.Workout", "Workout")
                         .WithMany("Subscriptions")

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FitnessCelebrity.Web.Models
 {
-    public class BasePost : BaseModel
+    public class BasePost : BaseUserData
     {
         public string Name { get; set; }
         public string Description { get; set; }

@@ -44,7 +44,7 @@ namespace FitnessCelebrity.Web.Repositories
         {
             //todo maybe move this?
             var dbset = GetSet<UserProfile>()
-                .Where(x => x.ApplicationUser.SubscribedFitnessPaths.Any(f => f.FitnessPathId == request.Id));
+                .Where(x => x.ApplicationUser.FitnessPathSubscriptions.Any(f => f.FitnessPathId == request.Id));
             return await PagingList<UserProfile>.CreateAsync(dbset, request.Page, request.Size);
         }
 
@@ -55,7 +55,7 @@ namespace FitnessCelebrity.Web.Repositories
             return await PagingList<FitnessPath>.CreateAsync(dbset, request.Page, request.Size);
         }
 
-        public Task<SubscribedFitnessPaths> CreateSubscription(SubscribedFitnessPaths subscribedFitnessPath)
+        public Task<FitnessPathSubscription> CreateSubscription(FitnessPathSubscription subscribedFitnessPath)
         {
             throw new NotImplementedException();
         }
