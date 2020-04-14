@@ -22,7 +22,7 @@ namespace FitnessCelebrity.Web.Repositories
             return entity;
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(long id)
         {
             var entity = await GetById(id);
             _dbContext.Set<TEntity>().Remove(entity);
@@ -34,7 +34,7 @@ namespace FitnessCelebrity.Web.Repositories
             return _dbContext.Set<TEntity>().AsNoTracking();
         }
 
-        public async Task<TEntity> GetById(int id)
+        public async Task<TEntity> GetById(long id)
         {
             return await _dbContext.Set<TEntity>()
                 .AsNoTracking()
@@ -46,7 +46,7 @@ namespace FitnessCelebrity.Web.Repositories
             return _dbContext.Set<T>().AsNoTracking();
         }
 
-        public async Task Update(int id, TEntity entity)
+        public async Task Update(long id, TEntity entity)
         {
             _dbContext.Set<TEntity>().Update(entity);
             await _dbContext.SaveChangesAsync();

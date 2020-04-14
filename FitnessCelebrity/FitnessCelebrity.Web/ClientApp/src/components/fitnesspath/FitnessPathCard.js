@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-function FitnessPathItem(props) {
+function FitnessPathCard(props) {
     const fitnessPath = props.fitnessPath;
     return (
     <div className="card">
@@ -14,4 +14,4 @@ function FitnessPathItem(props) {
     );
     }
 
-export default FitnessPathItem;
+export default FitnessPathCard;

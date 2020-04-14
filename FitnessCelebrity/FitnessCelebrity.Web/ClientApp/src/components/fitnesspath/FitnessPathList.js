@@ -1,5 +1,5 @@
 import React from "react";
-import FitnessPathItem from "./FitnessPathItem";
+import FitnessPathCard from "./FitnessPathCard";
 
 function FitnessPathList(props) {
     const fitnessPathResults = props.fitnessPathResults;
@@ -10,7 +10,7 @@ function FitnessPathList(props) {
         <div className="row">
             {fitnessPathResults.map(fitnessPath =>
             <div className="col"  key={fitnessPath.id}>
-                <FitnessPathItem fitnessPath={fitnessPath}></FitnessPathItem>
+                <FitnessPathCard fitnessPath={fitnessPath}></FitnessPathCard>
                 </div>
             )}
           </div>

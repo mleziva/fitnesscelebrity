@@ -25,11 +25,9 @@ namespace FitnessCelebrity.Web.Controllers
             this.mapper = mapper;
         }
         /// <summary>
-        /// Only the names of fitness paths returned for user
         /// If user id is not supplied, returns paths of current user
         /// </summary>
         /// <returns></returns>
-        [Route("user/list")]
         [HttpGet]
         public async Task<IEnumerable<FitnessPath>> Get([FromQuery(Name = "")]PageableUserIdRequest request)
         {
@@ -37,13 +35,6 @@ namespace FitnessCelebrity.Web.Controllers
             var paths = await fitnessPathRepository.ListUserCreatedFitnessPaths(request);
             return paths;
         }
-        // GET: api/FitnessPath
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET: api/FitnessPath/5
         [HttpGet("{id}")]
         public async Task<ActionResult<FitnessPath>> GetAsync(int id)
@@ -55,7 +46,22 @@ namespace FitnessCelebrity.Web.Controllers
             var fitnessPath = mapper.Map<FitnessPathDtoGet>(path);
             return Ok(fitnessPath);
         }
-
+        [Route("{id}/subscribers")]
+        [HttpGet]
+        public async Task<IEnumerable<UserProfile>> GetSubscribedUsers(long id, [FromQuery(Name = "")]PageableIdRequest request)
+        {
+            request.Id = id;
+            var users = await fitnessPathRepository.GetSubscribedUsers(request);
+            return users;
+        }
+        [Route("subscription/{userId}")]
+        [HttpGet]
+        public async Task<IEnumerable<FitnessPath>> GetSubscribedPaths(string userId, [FromQuery(Name = "")]PageableUserIdRequest request)
+        {
+            request.UserId = userId;
+            var paths = await fitnessPathRepository.GetSubscribedPaths(request);
+            return paths;
+        }
         // POST: api/FitnessPath
         [HttpPost]
         public void Post([FromBody] string value)

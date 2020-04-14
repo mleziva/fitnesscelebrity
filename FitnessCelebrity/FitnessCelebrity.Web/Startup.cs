@@ -68,6 +68,7 @@ namespace FitnessCelebrity.Web
             services.AddScoped<IWorkoutRepository, WorkoutRepository>();
             services.AddScoped<IFitnessPathRepository, FitnessPathRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IFitnessPathSubscriptionRepository, FitnessPathSubscriptionRepository>();
             services.AddScoped<IConfigurationService, ConfigurationService>();
             services.AddScoped<IControllerService, ControllerService>();
 

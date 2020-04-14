@@ -16,8 +16,8 @@ CRUD
 /api/fitnesspath/fitnesspathid123/subscribers
 list of subscribers
 
-/api/fitnesspath/subscriptions/userid123
+/api/fitnesspath/subscription/userid123
 list of fitness paths subscribed to
 
-/api/fitnesspath/id123/subscribe?userid=123
+/api/fitnesspathSubscription
 post & delete

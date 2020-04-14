@@ -25,7 +25,7 @@ namespace FitnessCelebrity.Web.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public new async Task<FitnessPath> GetById(int id)
+        public async Task<FitnessPath> GetById(int id)
         {
             return await GetAll()
                 .Include(i => i.FitnessPathWorkouts)
@@ -53,11 +53,6 @@ namespace FitnessCelebrity.Web.Repositories
             var dbset = GetAll()
                .Where(x => x.Subscriptions.Any(f => f.ApplicationUserId == request.UserId));
             return await PagingList<FitnessPath>.CreateAsync(dbset, request.Page, request.Size);
-        }
-
-        public Task<FitnessPathSubscription> CreateSubscription(FitnessPathSubscription subscribedFitnessPath)
-        {
-            throw new NotImplementedException();
         }
     }
 }

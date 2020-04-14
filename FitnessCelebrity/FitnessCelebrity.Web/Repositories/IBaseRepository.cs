@@ -11,13 +11,13 @@ namespace FitnessCelebrity.Web.Repositories
     {
         IQueryable<TEntity> GetAll();
 
-        Task<TEntity> GetById(int id);
+        Task<TEntity> GetById(long id);
 
         Task<TEntity> Create(TEntity entity);
 
-        Task Update(int id, TEntity entity);
+        Task Update(long id, TEntity entity);
 
-        Task Delete(int id);
+        Task Delete(long id);
 
         IQueryable<T> GetSet<T>() where T : BaseModel;
     }

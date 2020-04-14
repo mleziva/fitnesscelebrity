@@ -8,6 +8,7 @@ namespace FitnessCelebrity.Web.Models.Dto
 {
     public class FitnessPathDtoGet : BasePostDtoCreate
     {
+        public long Id { get; set; }
         public string Category { get; set; }
         public string CreatedByUserName { get; set; }
         public IList<FitnessPathDtoGetWorkouts> Workouts { get; set; }

@@ -6,7 +6,7 @@ export class FitnessPathService {
     //returns an array of top 50 fitness paths 
     async listUserFitnessPaths() {
         const token = await authService.getAccessToken();
-        const response = await fetch(FitnessPathRoutes.ListForUser, {
+        const response = await fetch(FitnessPathRoutes.Get, {
             method: 'GET',
             headers: { 
                 'Content-Type': 'application/json',
