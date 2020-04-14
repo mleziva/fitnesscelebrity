@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace FitnessCelebrity.Web.Models.Dto
 {
-    public class PageableUserIdRequest : PageableRequest
+    public class PageableIdRequest : PageableRequest
     {
-        public string UserId { get; set; }
+        public long Id { get; set; }
     }
 }

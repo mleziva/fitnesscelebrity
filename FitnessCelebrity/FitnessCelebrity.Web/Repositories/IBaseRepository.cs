@@ -18,5 +18,7 @@ namespace FitnessCelebrity.Web.Repositories
         Task Update(int id, TEntity entity);
 
         Task Delete(int id);
+
+        IQueryable<T> GetSet<T>() where T : BaseModel;
     }
 }

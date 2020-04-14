@@ -41,6 +41,11 @@ namespace FitnessCelebrity.Web.Repositories
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
+        public IQueryable<T> GetSet<T>() where T : BaseModel
+        {
+            return _dbContext.Set<T>().AsNoTracking();
+        }
+
         public async Task Update(int id, TEntity entity)
         {
             _dbContext.Set<TEntity>().Update(entity);
