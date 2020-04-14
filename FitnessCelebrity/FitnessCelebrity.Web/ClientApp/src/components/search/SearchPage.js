@@ -20,7 +20,7 @@ export class SearchPage extends Component {
 
   renderFitnessPathSearchResults(fitnessPathResults) {
     return (
-        <FitnessPathList fitnessPathResults={this.state.fitnessPathResults}></FitnessPathList>
+        <FitnessPathList fitnessPaths={this.state.fitnessPathResults}></FitnessPathList>
 
     );
   }

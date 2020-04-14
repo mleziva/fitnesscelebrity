@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
 import ProfileService from '../../services/ProfileService';
 import ProfileDetails from './profiledetails';
+import FitnessPathList from '../fitnesspath/FitnessPathList'
+import FitnessPathService from '../../services/FitnessPathService'
 
 export class ProfilePage extends Component {
   static displayName = ProfilePage.name;
 
   constructor(props) {
     super(props);
-    this.state = { profileData: {}, loading: true };
+    this.state = { profileData: {}, fitnessPaths: [], subscribedPaths: [], loading: true };
   }
 
   componentDidMount() {
     const { match: { params } } = this.props;
     this.populateProfile(params.profileUserName);
+    this.loadData();
+  }
+  async populateProfile(profileUserName) {
+    let data = await ProfileService.getProfile(profileUserName);
+    this.setState({ profileData: data, loading: false });
+  }
+  async loadData() {
+    let fitnessPaths = await FitnessPathService.get({size:5});
+    let subscribedPaths =  await FitnessPathService.getSubscribedPaths("677f3748-0249-45ce-8979-9b7eda98c668", {size:5});
+    this.setState({ fitnessPaths: fitnessPaths, subscribedPaths: subscribedPaths });
   }
 
   render() {
@@ -34,7 +46,10 @@ export class ProfilePage extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col">Top 5 Created fitness paths</div>
+          <div className="col">
+            Top 5 Created fitness paths
+            <FitnessPathList fitnessPaths={this.state.fitnessPaths} viewAll={{link: "link"}}></FitnessPathList>
+          </div>
         </div>
         <div className="row">
           <div className="col">Top 5 Created  workouts</div>
@@ -43,19 +58,18 @@ export class ProfilePage extends Component {
           <div className="col">Top 5 created movments</div>
         </div>
         <div className="row">
-          <div className="col">Top 5 followed fitness</div>
+          <div className="col">
+            Top 5 followed fitness
+            <FitnessPathList fitnessPaths={this.state.subscribedPaths}></FitnessPathList>
+            </div>
+            View all
+            <div className="col">view alls</div>
         </div>
         <div className="row">
           <div className="col">Top 5 followed workouts</div>
         </div>
-        <div className="row">
-          <div className="col">Top 5 followed movments</div>
-        </div>
       </div>
     );
   }
-  async populateProfile(profileUserName) {
-    let data = await ProfileService.getProfile(profileUserName);
-    this.setState({ profileData: data, loading: false });
-  }
+
 }

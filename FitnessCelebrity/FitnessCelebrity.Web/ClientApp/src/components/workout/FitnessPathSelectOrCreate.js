@@ -15,7 +15,7 @@ export class FitnessPathSelectOrCreate extends Component {
     async displayExistingPaths() {
         let showPaths = this.state.displayExistingPaths
         if (!showPaths) {
-            var paths = await FitnessPathService.listUserFitnessPaths();
+            var paths = await FitnessPathService.get();
             this.setState({ existingPaths: paths.map(c => ({name: c.name, id: c.id}))});
         }
         this.setState({
