@@ -8,10 +8,12 @@ namespace FitnessCelebrity.Web.Models
     public class DailyLog : BaseDateData
     {
         public long WorkoutHistoryId { get; set; }
-        public long UserId { get; set; }
+        public string UserId { get; set; }
         public int TimeSpent { get; set; }
         public string Notes { get; set; }
         public bool IsPublic { get; set; }
         public bool IsPrivate { get; set; }
+        public ApplicationUser User { get; set; }
+        public WorkoutHistory WorkoutHistory { get; set; }
     }
 }

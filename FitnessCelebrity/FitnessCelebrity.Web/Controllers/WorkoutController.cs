@@ -67,5 +67,13 @@ namespace FitnessCelebrity.Web.Controllers
         public void Delete(int id)
         {
         }
+
+        [Route("search")]
+        [HttpGet]
+        public async Task<IEnumerable<Workout>> Search([FromQuery(Name = "")]PageableQueryRequest request)
+        {
+            var workouts = await repository.SearchWorkouts(request);
+            return workouts;
+        }
     }
 }

@@ -20,5 +20,10 @@ namespace FitnessCelebrity.Web.Repositories
         {
             return await PagingList<Movement>.CreateAsync(GetAll().Where(x => x.CreatedById == request.UserId), request.Page, request.Size);
         }
+        public async Task<PagingList<Movement>> Search(PageableQueryRequest request)
+        {
+            return await PagingList<Movement>.CreateAsync(GetAll()
+                .Where(x => x.Tags.Contains(request.Query)), request.Page, request.Size);
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace FitnessCelebrity.Web.Repositories
     public interface IWorkoutRepository : IBaseRepository<Workout>
     {
         Task<PagingList<Workout>> Get(PageableUserIdRequest request);
+        Task<PagingList<Workout>> SearchWorkouts(PageableQueryRequest request);
     }
 }

@@ -11,6 +11,7 @@ namespace FitnessCelebrity.Web.Models
         public IList<FitnessPathWorkout> FitnessPathWorkouts { get; set; }
         public IList<WorkoutMovement> WorkoutMovements { get; set; }
         public virtual IEnumerable<WorkoutSubscription> Subscriptions { get; set; }
+        public virtual IEnumerable<WorkoutHistory> WorkoutHistories { get; set; }
 
     }
 }

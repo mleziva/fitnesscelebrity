@@ -116,6 +116,33 @@ namespace FitnessCelebrity.Web.Data
             .HasOne<Workout>(sc => sc.Workout)
             .WithMany(s => s.Subscriptions)
             .HasForeignKey(sc => sc.WorkoutId);
+
+            //workout history 1:many
+            modelBuilder.Entity<WorkoutHistory>()
+            .HasOne<ApplicationUser>(s => s.User)
+            .WithMany(g => g.WorkoutHistories)
+            .HasForeignKey(s => s.UserId);
+
+            modelBuilder.Entity<WorkoutHistory>()
+            .HasOne<FitnessPath>(s => s.FitnessPath)
+            .WithMany(g => g.WorkoutHistories)
+            .HasForeignKey(s => s.FitnessPathId);
+
+            modelBuilder.Entity<WorkoutHistory>()
+            .HasOne<Workout>(s => s.Workout)
+            .WithMany(g => g.WorkoutHistories)
+            .HasForeignKey(s => s.WorkoutId);
+
+            //daily log 1:many
+            modelBuilder.Entity<DailyLog>()
+            .HasOne<WorkoutHistory>(s => s.WorkoutHistory)
+            .WithMany(g => g.DailyLogs)
+            .HasForeignKey(s => s.WorkoutHistoryId);
+
+            modelBuilder.Entity<DailyLog>()
+            .HasOne<ApplicationUser>(s => s.User)
+            .WithMany(g => g.DailyLogs)
+            .HasForeignKey(s => s.UserId);
         }
     }
 }

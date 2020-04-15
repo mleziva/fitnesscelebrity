@@ -42,5 +42,12 @@ namespace FitnessCelebrity.Web.Controllers
 
             return Ok(movement);
         }
+        [Route("search")]
+        [HttpGet]
+        public async Task<IEnumerable<Movement>> Search([FromQuery(Name = "")]PageableQueryRequest request)
+        {
+            var movements = await repository.Search(request);
+            return movements;
+        }
     }
 }
