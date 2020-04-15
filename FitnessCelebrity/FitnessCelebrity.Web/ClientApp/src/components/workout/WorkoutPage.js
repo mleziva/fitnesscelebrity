@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Spinner from '../../components/home/Spinner'
+import FormGroupRow from '../../components/home/FormGroupRow'
 import WorkoutService from '../../services/WorkoutService'
 
 export class WorkoutPage extends Component {
@@ -21,24 +22,14 @@ export class WorkoutPage extends Component {
 
   render() {
     let workout = this.state.workout;
-    let loading = this.state.loading
-
     return (
       <div>
           <Spinner loading={this.state.loading}></Spinner>
         <form>
-        <div className="form-group row">
-            <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Name</label>
-            <div className="col-sm-10">
-            <input type="text" readOnly className="form-control-plaintext" id="staticEmail" value={workout.name}/>
-            </div>
-        </div>
-        <div className="form-group row">
-            <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Description</label>
-            <div className="col-sm-10">
-            <input type="text" readOnly className="form-control-plaintext" id="staticEmail" value={workout.description}/>
-            </div>
-        </div>
+            <FormGroupRow value={workout.name} label={"Name"}/>
+            <FormGroupRow value={workout.description} label={"Description"}/>
+            <FormGroupRow value={workout.body} label={"Body"}/>
+            <FormGroupRow value={workout.tags} label={"Tags"}/>
         </form>
       </div>
     );

@@ -8,6 +8,7 @@ import { FitnessPathPage } from './components/fitnesspath/FitnessPathPage';
 import { WorkoutPage } from './components/workout/WorkoutPage';
 import { MovementPage } from './components/movement/MovementPage';
 import { ProfilePage } from './components/profile/profilepage';
+import { SearchPage } from './components/search/SearchPage';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
@@ -22,6 +23,7 @@ export default class App extends Component {
     return (
       <Layout>
         <Route exact path='/' component={Home} />
+          <Route path='/search' component={SearchPage} />
             <Route path='/workout/create' component={CreatePage} />
             <Route path='/fitnessPath/:fitnessPathId' component={FitnessPathPage} />
             <Route path='/workout/:workoutId' component={WorkoutPage} />

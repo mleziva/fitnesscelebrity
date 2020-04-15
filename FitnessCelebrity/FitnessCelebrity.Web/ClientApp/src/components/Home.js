@@ -7,6 +7,12 @@ export class Home extends Component {
   render () {
     return (
       <div>
+        Your current active workouts: 
+
+        Your progress summary:
+
+        What other people have been doing:
+
         <SearchPage></SearchPage>
       </div>
     );

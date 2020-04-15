@@ -32,5 +32,15 @@ namespace FitnessCelebrity.Web.Controllers
             var movements = await repository.Get(request);
             return movements;
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetAsync(int id)
+        {
+            var movement = await repository.GetById(id);
+            if (movement == null)
+                return NotFound();
+
+            return Ok(movement);
+        }
     }
 }

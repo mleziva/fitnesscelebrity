@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import FitnessPathService from '../../services/FitnessPathService'
+import Spinner from '../../components/home/Spinner'
+import FormGroupRow from '../../components/home/FormGroupRow'
+import MovementService from '../../services/MovementService'
 
 export class MovementPage extends Component {
   static displayName = MovementPage.name;
@@ -11,24 +13,24 @@ export class MovementPage extends Component {
 
   componentDidMount() {
     const { match: { params } } = this.props;
-    this.populateFitnessPath(params.movementId);
+    this.loadMovement(params.movementId);
   }
-  async populateFitnessPath(id) {
-    let data = await FitnessPathService.getById(id);
-    this.setState({ fitnessPath: data, loading: false });
+  async loadMovement(id) {
+    let data = await MovementService.getById(id);
+    this.setState({ movement: data, loading: false });
   }
   
   render() {
-    let fitnessPath = this.state.fitnessPath;
-    let contents = this.state.loading
-    ? <p><em>Loading...</em></p>
-    : this.renderFitnessPath(fitnessPath);
-
+    let movement = this.state.movement;
     return (
       <div>
-        <h1 >Fitness Path: {fitnessPath.name}</h1>
-        <h2> Created by: author</h2>
-        {contents}
+          <Spinner loading={this.state.loading}></Spinner>
+        <form>
+            <FormGroupRow value={movement.name} label={"Name"}/>
+            <FormGroupRow value={movement.description} label={"Description"}/>
+            <FormGroupRow value={movement.body} label={"Body"}/>
+            <FormGroupRow value={movement.tags} label={"Tags"}/>
+        </form>
       </div>
     );
   }

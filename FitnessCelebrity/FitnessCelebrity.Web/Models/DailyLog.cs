@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace FitnessCelebrity.Web.Models
 {
-    public class BasePost : BaseUserData
+    public class DailyLog : BaseDateData
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Body { get; set; }
-        public string Tags { get; set; }
+        public long WorkoutHistoryId { get; set; }
+        public long UserId { get; set; }
+        public int TimeSpent { get; set; }
+        public string Notes { get; set; }
         public bool IsPublic { get; set; }
         public bool IsPrivate { get; set; }
     }

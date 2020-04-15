@@ -185,7 +185,7 @@ export class AuthorizeService {
         }
 
         let settings = await response.json();
-        settings.automaticSilentRenew = true;
+        settings.automaticSilentRenew = false;  //SET TO FALSE
         settings.includeIdTokenInSilentRenew = true;
         settings.userStore = new WebStorageStateStore({
             prefix: ApplicationName
@@ -196,6 +196,10 @@ export class AuthorizeService {
         this.userManager.events.addUserSignedOut(async () => {
             await this.userManager.removeUser();
             this.updateState(undefined);
+        });
+        //ADD NEXT LINES
+        this.userManager.events.addAccessTokenExpired(async () => {
+            await this.signIn();
         });
     }
 
