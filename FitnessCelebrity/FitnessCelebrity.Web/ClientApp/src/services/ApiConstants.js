@@ -3,6 +3,7 @@ const fitnessPathController = 'FitnessPath'
 const fitSubscriptionController = 'FitnessPathSubscription'
 const workoutController = 'Workout'
 const ProfileController = 'UserProfile'
+const MovementController = 'Movement'
 
 export const FitnessPathRoutes = {
   Get: `${prefix}/${fitnessPathController}/`,
@@ -14,6 +15,7 @@ export const FitnessPathRoutes = {
 
 export const WorkoutRoutes = {
     CreateWorkout: `${prefix}/${workoutController}`,
+    GetById: `${prefix}/${workoutController}/`,
   };
 
 export const ProfileRoutes = {
@@ -22,5 +24,9 @@ export const ProfileRoutes = {
 
 export const FitSubscriptionRoutes = {
   CreateSubscription: `${prefix}/${fitSubscriptionController}/`,
+};
+
+export const MovementRoutes = {
+  GetById: `${prefix}/${MovementController}/`,
 };
   

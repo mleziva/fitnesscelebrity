@@ -2,6 +2,20 @@ import authService from '../components/api-authorization/AuthorizeService'
 import {WorkoutRoutes} from './ApiConstants'
 
 export class WorkoutService {
+
+    async getById(id) {
+        const url = WorkoutRoutes.GetById + id;
+        const token = await authService.getAccessToken();
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return await response.json();
+    }
+
     async createWorkout(workout) {
         const token = await authService.getAccessToken();
         const response = await fetch(WorkoutRoutes.CreateWorkout, {
@@ -21,6 +35,7 @@ export class WorkoutService {
          
         //const data = await response.json();
     }
+
 }
 
 const workoutService = new WorkoutService();
