@@ -1,5 +1,6 @@
 ﻿using FitnessCelebrity.Web.Data;
 using FitnessCelebrity.Web.Models;
+using FitnessCelebrity.Web.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace FitnessCelebrity.Web.Repositories
 
         }
 
-        public Task<Workout> GetWorkouts()
+        public async Task<PagingList<Workout>> Get(PageableUserIdRequest request)
         {
-            throw new NotImplementedException();
+            return await PagingList<Workout>.CreateAsync(GetAll().Where(x => x.CreatedById == request.UserId), request.Page, request.Size);
         }
     }
 }

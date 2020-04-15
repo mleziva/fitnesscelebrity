@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using IdentityServer4.Models;
 using IdentityServer4;
 using FitnessCelebrity.Web.Services;
+using FitnessCelebrity.Web.Repositories.Interfaces;
 
 namespace FitnessCelebrity.Web
 {
@@ -67,6 +68,7 @@ namespace FitnessCelebrity.Web
 
             services.AddScoped<IWorkoutRepository, WorkoutRepository>();
             services.AddScoped<IFitnessPathRepository, FitnessPathRepository>();
+            services.AddScoped<IMovementRepository, MovementRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IFitnessPathSubscriptionRepository, FitnessPathSubscriptionRepository>();
             services.AddScoped<IConfigurationService, ConfigurationService>();

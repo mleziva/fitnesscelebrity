@@ -21,25 +21,26 @@ namespace FitnessCelebrity.Web.Controllers
         private readonly string controllerName = "workout";
         private readonly IMapper mapper;
         private readonly IConfigurationService configService;
-        private readonly IWorkoutRepository workoutRepository;
-        public WorkoutController(IWorkoutRepository workoutRepository, IControllerService controllerService)
+        private readonly IWorkoutRepository repository;
+        public WorkoutController(IWorkoutRepository repository, IControllerService controllerService)
         {
-            this.workoutRepository = workoutRepository;
+            this.repository = repository;
             mapper = controllerService.Mapper;
             configService = controllerService.ConfigurationService;
         }
         // GET: api/Workout
         [HttpGet]
-        public async Task<IEnumerable<Workout>> Get()
+        public async Task<IEnumerable<Workout>> Get([FromQuery(Name = "")]PageableUserIdRequest request)
         {
-            return await workoutRepository.GetAll().ToListAsync();
+            var workouts = await repository.Get(request);
+            return workouts;
         }
 
         // GET: api/Workout/5
         [HttpGet("{id}")]
         public async Task<ActionResult> GetAsync(int id)
         {
-            var workout = await workoutRepository.GetById(id);
+            var workout = await repository.GetById(id);
             if (workout == null)
                 return NotFound();
 
@@ -51,7 +52,7 @@ namespace FitnessCelebrity.Web.Controllers
         public async Task<ActionResult> PostAsync([FromBody] WorkoutDtoCreate workout)
         {
             var workoutEntity = mapper.Map<Workout>(workout, opt => {opt.Items["UserId"] = User.Identity.GetId(); });
-            var createdWorkout = await workoutRepository.Create(workoutEntity);
+            var createdWorkout = await repository.Create(workoutEntity);
             return Created(configService.GenerateCreatedUrl(controllerName, createdWorkout.Id), createdWorkout);
         }
 
