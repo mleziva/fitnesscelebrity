@@ -16,10 +16,12 @@ export const FitnessPathRoutes = {
 export const WorkoutRoutes = {
     CreateWorkout: `${prefix}/${workoutController}`,
     GetById: `${prefix}/${workoutController}/`,
+    Search: `${prefix}/${workoutController}/search`
   };
 
 export const ProfileRoutes = {
   GetProfile: `${prefix}/${ProfileController}/username/`,
+ 
 };
 
 export const FitSubscriptionRoutes = {
@@ -28,5 +30,6 @@ export const FitSubscriptionRoutes = {
 
 export const MovementRoutes = {
   GetById: `${prefix}/${MovementController}/`,
+  Search: `${prefix}/${MovementController}/search`
 };
   

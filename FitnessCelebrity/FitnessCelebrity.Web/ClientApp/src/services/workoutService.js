@@ -16,6 +16,20 @@ export class WorkoutService {
         return await response.json();
     }
 
+    async search(query) {
+        const url = WorkoutRoutes.Search +"?query=" + query;
+        const token = await authService.getAccessToken();
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return await response.json();
+    }
+
+
     async createWorkout(workout) {
         const token = await authService.getAccessToken();
         const response = await fetch(WorkoutRoutes.CreateWorkout, {
