@@ -5,7 +5,7 @@ function MovementList(props) {
     return (
         <div className=" row">
             <div className="col">
-            <div class="list-group">
+            <div className="list-group">
                 {movements.map(movement =>
                 <Link key={movement.id} to={'/movement/'+movement.id} 
                 className="list-group-item list-group-item-action">{movement.name} <small>{movement.description}</small></Link>

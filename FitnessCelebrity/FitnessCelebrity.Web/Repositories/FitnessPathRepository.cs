@@ -2,10 +2,7 @@
 using FitnessCelebrity.Web.Models;
 using FitnessCelebrity.Web.Models.Dto;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace FitnessCelebrity.Web.Repositories
@@ -71,7 +68,9 @@ namespace FitnessCelebrity.Web.Repositories
             }
             //add and remove workouts to match model
             var newWorkouts = fitnessPath.FitnessPathWorkouts;
+            //workouts which exist in the db, not in the request
             var toRemove = existingFitnessPath.FitnessPathWorkouts.Where(l2 =>!newWorkouts.Any(l1 => l1.WorkoutId == l2.WorkoutId)).ToList();
+            //workouts that exist in the request, not in the db
             var toAdd = newWorkouts.Where(l2 => !existingFitnessPath.FitnessPathWorkouts.Any(l1 => l1.WorkoutId == l2.WorkoutId)).ToList();
             toRemove.ForEach(x => existingFitnessPath.FitnessPathWorkouts.Remove(x));
             toAdd.ForEach(x => existingFitnessPath.FitnessPathWorkouts.Add(x));

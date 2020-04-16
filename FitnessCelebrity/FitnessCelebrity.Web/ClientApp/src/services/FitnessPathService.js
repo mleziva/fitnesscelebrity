@@ -1,6 +1,6 @@
 import authService from '../components/api-authorization/AuthorizeService'
 import {FitnessPathRoutes} from './ApiConstants'
-import {Helper} from './Helper'
+import Helper from './Helper'
 
 export class FitnessPathService {
 
