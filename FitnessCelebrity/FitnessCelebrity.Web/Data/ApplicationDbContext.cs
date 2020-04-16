@@ -13,6 +13,11 @@ namespace FitnessCelebrity.Web.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
+        public DbSet<FitnessPath> FitnessPaths { get; set; }
+        public DbSet<FitnessPathWorkout> FitnessPathWorkouts { get; set; }
+        public DbSet<Workout> Workouts { get; set; }
+        public DbSet<WorkoutMovement> WorkoutMovements { get; set; }
+        public DbSet<Movement> Movements { get; set; }
         public ApplicationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)

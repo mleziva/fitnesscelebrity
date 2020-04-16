@@ -10,7 +10,7 @@ namespace FitnessCelebrity.Web.Repositories
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseModel
     {
-        private readonly ApplicationDbContext _dbContext;
+        public readonly ApplicationDbContext _dbContext;
         public BaseRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -48,6 +48,7 @@ namespace FitnessCelebrity.Web.Repositories
 
         public async Task Update(long id, TEntity entity)
         {
+            entity.Id = id;
             _dbContext.Set<TEntity>().Update(entity);
             await _dbContext.SaveChangesAsync();
         }

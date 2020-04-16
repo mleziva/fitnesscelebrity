@@ -15,12 +15,14 @@ export class SearchPage extends Component {
     this.state = { fitnessPathResults: [], workoutResults: [], movementResults: [], query: '' };
   }
   componentDidMount() {
-    let qobject = Helper.queryToObject(this.props.location.search);
-    let qtext = qobject.q;
-    if(qtext) {
-      this.setState({query: qtext});
-      this.search(qtext);
-     }
+    if(this.props.location && this.props.location.search){
+      let qobject = Helper.queryToObject(this.props.location.search);
+      let qtext = qobject.q;
+      if(qtext) {
+        this.setState({query: qtext});
+        this.search(qtext);
+      }
+    }
   }
 
   handleChange = (e) => {

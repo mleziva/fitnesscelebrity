@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FitnessCelebrity.Web.Models.Dto
 {
-    public class MovementDtoCreate : BasePostDtoCreate
+    public class MovementDtoCreate : DtoBase
     {
         public string Type { get; set; }
 

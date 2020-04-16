@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitnessCelebrity.Web.Models.Dto
 {
-    public class FitnessPathDtoGet : BasePostDtoCreate
+    public class DtoFitnessPath : DtoBase
     {
         public long Id { get; set; }
         public string Category { get; set; }

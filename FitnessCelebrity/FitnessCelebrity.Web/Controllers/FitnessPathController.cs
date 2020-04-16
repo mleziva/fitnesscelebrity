@@ -43,7 +43,7 @@ namespace FitnessCelebrity.Web.Controllers
             if (path == null)
                 return NotFound();
 
-            var fitnessPath = mapper.Map<FitnessPathDtoGet>(path);
+            var fitnessPath = mapper.Map<DtoFitnessPath>(path);
             return Ok(fitnessPath);
         }
         [Route("{id}/subscribers")]
@@ -70,8 +70,10 @@ namespace FitnessCelebrity.Web.Controllers
 
         // PUT: api/FitnessPath/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task Put(long id, DtoFitnessPath fitnessPath)
         {
+            var path = mapper.Map<FitnessPath>(fitnessPath, opt => { opt.Items["UserId"] = User.Identity.GetId(); });
+            await fitnessPathRepository.Update(id, path);
         }
 
         // DELETE: api/ApiWithActions/5
