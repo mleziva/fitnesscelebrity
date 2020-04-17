@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Spinner from '../../components/home/Spinner'
-import FormGroupRow from '../../components/home/FormGroupRow'
+import SpanRow from '../../components/home/SpanRow'
 import MovementService from '../../services/MovementService'
 
 export class MovementPage extends Component {
@@ -26,10 +26,10 @@ export class MovementPage extends Component {
       <div>
           <Spinner loading={this.state.loading}></Spinner>
         <form>
-            <FormGroupRow value={movement.name} label={"Name"}/>
-            <FormGroupRow value={movement.description} label={"Description"}/>
-            <FormGroupRow value={movement.body} label={"Body"}/>
-            <FormGroupRow value={movement.tags} label={"Tags"}/>
+            <SpanRow value={movement.name} label={"Name"}/>
+            <SpanRow value={movement.description} label={"Description"}/>
+            <SpanRow value={movement.body} label={"Body"}/>
+            <SpanRow value={movement.tags} label={"Tags"}/>
         </form>
       </div>
     );

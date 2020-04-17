@@ -1,6 +1,6 @@
 import React from "react";
 
-function FormGroupRow(props) {
+function FormGroup(props) {
     const id = props.label +"id";
     const value = props.value ?? "";
     const isEditing = props.isEditing;
@@ -16,4 +16,4 @@ function FormGroupRow(props) {
         </div>
     );
 }
-export default FormGroupRow;
+export default FormGroup;

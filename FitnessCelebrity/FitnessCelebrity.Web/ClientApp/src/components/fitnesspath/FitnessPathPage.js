@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import FitnessPathService from '../../services/FitnessPathService'
 import SubscribeBtn from './SubscribeBtn';
-import Spinner from '../../components/home/Spinner'
-import FormGroupRow from '../../components/home/FormGroupRow'
-import WorkoutList from '../../components/workout/WorkoutList'
+import Spinner from '../home/Spinner'
+import SpanRow from '../home/SpanRow'
+import WorkoutList from '../workout/WorkoutList'
+import FitnessPathEditForm from './FitnessPathEditForm'
 
 export class FitnessPathPage extends Component {
   static displayName = FitnessPathPage.name;
@@ -43,15 +44,15 @@ export class FitnessPathPage extends Component {
           <SubscribeBtn fitnessPathId={fitnessPath.id} isEditing={isEditing}></SubscribeBtn>
           <button className="btn btn-primary" onClick={this.handleEditClick} >Edit</button>
         <form>
-            <FormGroupRow value={fitnessPath.name} label={"Name"} name="name" isEditing={isEditing} handleChange={this.handleChange}/>
-            <FormGroupRow value={fitnessPath.category} label={"Category"} isEditing={isEditing}/>
-            <FormGroupRow value={fitnessPath.description} label={"Description"} isEditing={isEditing}/>
-            <FormGroupRow value={fitnessPath.body} label={"Body"} isEditing={isEditing}/>
-            <FormGroupRow value={fitnessPath.tags} label={"Tags"} isEditing={isEditing}/>
+            <SpanRow value={fitnessPath.name} label={"Name"} name="name" />
+            <SpanRow value={fitnessPath.category} label={"Category"} />
+            <SpanRow value={fitnessPath.description} label={"Description"} />
+            <SpanRow value={fitnessPath.body} label={"Body"} />
+            <SpanRow value={fitnessPath.tags} label={"Tags"} />
         </form>
         <h2>Workouts</h2>
         <WorkoutList workouts={fitnessPath.workouts} />
-
+        <FitnessPathEditForm values={fitnessPath}/>
       </div>
     );
   }
