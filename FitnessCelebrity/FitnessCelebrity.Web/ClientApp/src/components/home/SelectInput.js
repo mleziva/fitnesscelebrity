@@ -1,19 +1,26 @@
 import React from "react";
+import {useField} from "formik";
 
-function FormGroup(props) {
-    const id = props.label +"id";
-    const value = props.value ?? "";
-    const isEditing = props.isEditing;
-    const name = props.name;
-
+function SelectInput(props) {
+    const label = props.label;
+    const formikProps = {...props};
+    const [field, meta] = useField(formikProps);
+    const options = field.value;
     return (
         
         <div className="form-group row">
-            <label htmlFor={id} className="col-sm-2 col-form-label">{props.label}</label>
+            <label htmlFor={formikProps.name} className="col-sm-2 col-form-label">{label}</label>
             <div className="col-sm-10">
-                <input type="text" readOnly={!isEditing} name={name} className={isEditing ? "form-control": "form-control-plaintext"} id={id} value={value} onChange={props.handleChange}/>
+            <select multiple className="form-control" id={formikProps.name} {...field} {...formikProps}>
+            {options.map(item =>
+                    <option value={item.id}>{item.name}</option>
+                )}
+            </select>
+                {meta.touched && meta.error ? (
+                <div className="error">{meta.error}</div>
+                ) : null}
             </div>
         </div>
     );
 }
-export default FormGroup;
+export default SelectInput;

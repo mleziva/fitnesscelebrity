@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import FitnessPathService from '../../services/FitnessPathService'
 import SubscribeBtn from './SubscribeBtn';
 import Spinner from '../home/Spinner'
-import SpanRow from '../home/SpanRow'
 import WorkoutList from '../workout/WorkoutList'
 import FitnessPathEditForm from './FitnessPathEditForm'
+import FitnessPathDetails from './FitnessPathDetails'
+import FitnessPathWorkouts from './FitnessPathWorkouts'
+
 
 export class FitnessPathPage extends Component {
   static displayName = FitnessPathPage.name;
@@ -38,21 +40,37 @@ export class FitnessPathPage extends Component {
   render() {
     let fitnessPath = this.state.fitnessPath;
     let isEditing = this.state.isEditing;
+    let detailsView =  (
+      <>
+      <FitnessPathDetails fitnessPath={fitnessPath}/>
+      <h2>Linked Workouts</h2>
+      <WorkoutList workouts={fitnessPath.workouts} />
+      </>
+    );
+    let editingView = (
+      <>
+      <FitnessPathEditForm values={fitnessPath}/>
+      </>
+    );
+    let content = isEditing ? editingView : detailsView;
     return (
       <div>
           <Spinner loading={this.state.loading}></Spinner>
-          <SubscribeBtn fitnessPathId={fitnessPath.id} isEditing={isEditing}></SubscribeBtn>
-          <button className="btn btn-primary" onClick={this.handleEditClick} >Edit</button>
-        <form>
-            <SpanRow value={fitnessPath.name} label={"Name"} name="name" />
-            <SpanRow value={fitnessPath.category} label={"Category"} />
-            <SpanRow value={fitnessPath.description} label={"Description"} />
-            <SpanRow value={fitnessPath.body} label={"Body"} />
-            <SpanRow value={fitnessPath.tags} label={"Tags"} />
-        </form>
-        <h2>Workouts</h2>
-        <WorkoutList workouts={fitnessPath.workouts} />
-        <FitnessPathEditForm values={fitnessPath}/>
+          <div className="row">
+            <div className={`col-sm-2  ${isEditing ? "invisible" : ""}`}>
+            <SubscribeBtn fitnessPathId={fitnessPath.id} ></SubscribeBtn>
+            </div>
+            <div className="col-sm-2 pull-right offset-sm-8">
+            <div className="text-right">
+              <button className="btn btn-primary" onClick={this.handleEditClick} >{isEditing ? "Cancel" : "Edit"}</button>
+              </div>
+            </div>
+             
+          </div>
+          
+           {content}
+          <FitnessPathWorkouts workouts={fitnessPath.workouts}/>
+           
       </div>
     );
   }

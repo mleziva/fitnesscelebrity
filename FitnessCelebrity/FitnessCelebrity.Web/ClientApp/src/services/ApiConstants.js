@@ -16,6 +16,7 @@ export const FitnessPathRoutes = {
 export const WorkoutRoutes = {
     CreateWorkout: `${prefix}/${workoutController}`,
     GetById: `${prefix}/${workoutController}/`,
+    Get: `${prefix}/${workoutController}/`,
     Search: `${prefix}/${workoutController}/search`
   };
 

@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Form} from "formik";
 import * as Yup from "yup";
 import TextInput from "../home/TextInput"
+import SelectInput from "../home/SelectInput"
 
 
 function FitnessPathEditForm(props) {
@@ -13,22 +14,12 @@ function FitnessPathEditForm(props) {
             <Formik
               initialValues= {values}
               validationSchema={Yup.object({
-                firstName: Yup.string()
+                name: Yup.string()
                   .max(15, "Must be 15 characters or less")
                   .required("Required"),
-                lastName: Yup.string()
+                description: Yup.string()
                   .max(20, "Must be 20 characters or less")
-                  .required("Required"),
-                email: Yup.string()
-                  .email("Invalid email addresss`")
-                  .required("Required"),
-                jobType: Yup.string()
-                  // specify the set of valid values for job type
-                  // @see http://bit.ly/yup-mixed-oneOf
-                  .oneOf(
-                    ["designer", "development", "product", "other"],
-                    "Invalid Job Type"
-                  )
+                  .required("Required")
               })}
               onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
@@ -45,16 +36,10 @@ function FitnessPathEditForm(props) {
                   placeholder="Move that body"
                 />
                  <TextInput
-                  label="Created By"
-                  name="description"
-                  type="text"
-                  placeholder="High-energy workouts"
-                />
-                 <TextInput
                   label="Category"
-                  name="description"
+                  name="category"
                   type="text"
-                  placeholder="High-energy workouts"
+                  placeholder="Cardio"
                 />
                 <TextInput
                   label="Description"
@@ -64,16 +49,21 @@ function FitnessPathEditForm(props) {
                 />
                 <TextInput
                   label="Body"
-                  name="email"
+                  name="body"
                   type="text"
-                  placeholder="jane@formik.com"
+                  placeholder="15 pushups"
                 /> 
                   <TextInput
                   label="Tags"
-                  name="email"
+                  name="tags"
                   type="text"
-                  placeholder="jane@formik.com"
+                  placeholder="cardio fun"
                 />     
+                 <SelectInput multiple
+                  label="Workouts"
+                  name="workouts"
+                  type="select"
+                />
                 <button type="submit">Save</button>
               </Form>
             </Formik>

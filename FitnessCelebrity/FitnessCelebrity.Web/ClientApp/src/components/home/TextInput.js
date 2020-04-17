@@ -11,7 +11,7 @@ function TextInput(props) {
         <div className="form-group row">
             <label htmlFor={formikProps.id || formikProps.name} className="col-sm-2 col-form-label">{label}</label>
             <div className="col-sm-10">
-                <input className={"form-control"} {...field} {...formikProps} />
+                <input className={"form-control"} id={formikProps.name} {...field} {...formikProps} />
                 {meta.touched && meta.error ? (
                 <div className="error">{meta.error}</div>
                 ) : null}
