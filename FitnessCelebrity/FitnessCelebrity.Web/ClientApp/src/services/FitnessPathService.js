@@ -68,6 +68,30 @@ export class FitnessPathService {
         });
         return await response.json();
     }
+    async update(fitnessPath) {
+        const url = FitnessPathRoutes.Update.replace("{fitnesspathid}",fitnessPath.id)
+        const token = await authService.getAccessToken();
+        const response = await fetch(url, {
+            method: 'PUT',
+            body: JSON.stringify(fitnessPath),
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+    }
+    async updateLinkedWorkouts(fitnessPath) {
+        const url = FitnessPathRoutes.UpdateWorkouts.replace("{fitnesspathid}",fitnessPath.id)
+        const token = await authService.getAccessToken();
+        const response = await fetch(url, {
+            method: 'PUT',
+            body: JSON.stringify(fitnessPath),
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+    }
 }
 
 const fpService = new FitnessPathService();

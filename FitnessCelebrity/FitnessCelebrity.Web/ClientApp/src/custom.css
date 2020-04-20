@@ -16,3 +16,7 @@ code {
 .pathformdiv {
     background-color: #647ebd;
 }
+
+.search-list-results{
+  height: 50vh;
+}

@@ -15,5 +15,7 @@ namespace FitnessCelebrity.Web.Repositories
         Task<PagingList<UserProfile>> GetSubscribedUsers(PageableIdRequest request);
         Task<PagingList<FitnessPath>> GetSubscribedPaths(PageableUserIdRequest request);
         new Task Update(long id, FitnessPath  fitnessPath);
+        Task UpdateWorkouts(long id, FitnessPath  fitnessPath);
+        Task UpdateEntity(long id, FitnessPath  fitnessPath);
     }   
 }

@@ -11,6 +11,8 @@ export const FitnessPathRoutes = {
   Search: `${prefix}/${fitnessPathController}/search`,
   GetSubscribers: `${prefix}/${fitnessPathController}/{fitnesspathid}/subscribers`,
   GetSubscribedPaths: `${prefix}/${fitnessPathController}/subscription/{userid}`,
+  Update: `${prefix}/${fitnessPathController}/{fitnesspathid}`,
+  UpdateWorkouts: `${prefix}/${fitnessPathController}/workouts/{fitnesspathid}`,
 };
 
 export const WorkoutRoutes = {

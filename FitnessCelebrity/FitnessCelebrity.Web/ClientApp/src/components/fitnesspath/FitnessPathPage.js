@@ -3,10 +3,8 @@ import FitnessPathService from '../../services/FitnessPathService'
 import SubscribeBtn from './SubscribeBtn';
 import Spinner from '../home/Spinner'
 import WorkoutList from '../workout/WorkoutList'
-import FitnessPathEditForm from './FitnessPathEditForm'
 import FitnessPathDetails from './FitnessPathDetails'
-import FitnessPathWorkouts from './FitnessPathWorkouts'
-
+import { Link } from 'react-router-dom';
 
 export class FitnessPathPage extends Component {
   static displayName = FitnessPathPage.name;
@@ -24,53 +22,34 @@ export class FitnessPathPage extends Component {
     let data = await FitnessPathService.getById(id);
     this.setState({ fitnessPath: data, loading: false });
   }
-  handleChange = (e) => {
-    const target = e.target;
-    this.setState({
-      fitnessPath: {
-             ...this.state.fitnessPath, // deconstruct state.abc into a new object-- effectively making a copy
-             [target.name]: target.value
-            }
-    });
-  }
-  handleEditClick =() => {
-    this.setState({ isEditing: !this.state.isEditing });
-  }
 
   render() {
     let fitnessPath = this.state.fitnessPath;
-    let isEditing = this.state.isEditing;
-    let detailsView =  (
-      <>
-      <FitnessPathDetails fitnessPath={fitnessPath}/>
-      <h2>Linked Workouts</h2>
-      <WorkoutList workouts={fitnessPath.workouts} />
-      </>
-    );
-    let editingView = (
-      <>
-      <FitnessPathEditForm values={fitnessPath}/>
-      </>
-    );
-    let content = isEditing ? editingView : detailsView;
+
+  
     return (
       <div>
           <Spinner loading={this.state.loading}></Spinner>
-          <div className="row">
-            <div className={`col-sm-2  ${isEditing ? "invisible" : ""}`}>
-            <SubscribeBtn fitnessPathId={fitnessPath.id} ></SubscribeBtn>
+              <div className="row">
+            <div className="col-sm-4">
+              <SubscribeBtn fitnessPathId={fitnessPath.id} ></SubscribeBtn>
             </div>
-            <div className="col-sm-2 pull-right offset-sm-8">
-            <div className="text-right">
-              <button className="btn btn-primary" onClick={this.handleEditClick} >{isEditing ? "Cancel" : "Edit"}</button>
-              </div>
+            <div className="col-sm-2 offset-sm-6">
+              <div className="text-right">
+              <Link className="btn btn-primary" to={this.props.location.pathname + '/edit'}>Edit</Link>
+                </div>
             </div>
-             
           </div>
-          
-           {content}
-          <FitnessPathWorkouts workouts={fitnessPath.workouts}/>
-           
+          <FitnessPathDetails fitnessPath={fitnessPath}/>
+      <div className="row">
+        <div className="col-sm-4">
+          <h2>Linked Workouts</h2>
+        </div>
+        <div className="col-sm-2 offset-sm-6">
+        <Link className="btn btn-primary" to={this.props.location.pathname + '/edit/workouts'}>Edit</Link>
+          </div>
+      </div>
+      <WorkoutList workouts={fitnessPath.workouts} />
       </div>
     );
   }

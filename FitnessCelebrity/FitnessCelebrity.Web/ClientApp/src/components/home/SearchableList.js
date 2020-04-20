@@ -28,9 +28,9 @@ function SearchableList(props) {
     }
     //const workouts = props.workouts ?? [];
     return (
-        <div id="searchableList">
+        <div>
             <input className="search" placeholder="Search" onChange={search}  />
-            <ul className="list list-group">{listItems}</ul>
+            <ul className="list list-group search-list-results overflow-auto">{listItems}</ul>
         </div>
     );
 }

@@ -5,6 +5,8 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { CreatePage } from './components/workout/Create-Page';
 import { FitnessPathPage } from './components/fitnesspath/FitnessPathPage';
+import { FitnessPathEditPage } from './components/fitnesspath/FitnessPathEditPage';
+import { FitnessPathEditWorkoutsPage } from './components/fitnesspath/FitnessPathEditWorkoutsPage';
 import { WorkoutPage } from './components/workout/WorkoutPage';
 import { MovementPage } from './components/movement/MovementPage';
 import { ProfilePage } from './components/profile/profilepage';
@@ -24,8 +26,11 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={Home} />
           <Route path='/search' component={SearchPage} />
+          <Route exact  path='/fitnessPath/:fitnessPathId' component={FitnessPathPage} />
+          <Route exact path='/fitnessPath/:fitnessPathId/edit' component={FitnessPathEditPage} />
+          <Route exact path='/fitnessPath/:fitnessPathId/edit/workouts' component={FitnessPathEditWorkoutsPage} />
+
             <Route path='/workout/create' component={CreatePage} />
-            <Route path='/fitnessPath/:fitnessPathId' component={FitnessPathPage} />
             <Route path='/workout/:workoutId' component={WorkoutPage} />
             <Route path='/movement/:movementId' component={MovementPage} />
             <Route path='/profile/:profileUserName' component={ProfilePage} />
