@@ -7,6 +7,7 @@ using FitnessCelebrity.Web.Extensions;
 using FitnessCelebrity.Web.Models;
 using FitnessCelebrity.Web.Models.Dto;
 using FitnessCelebrity.Web.Repositories;
+using FitnessCelebrity.Web.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,13 +17,15 @@ namespace FitnessCelebrity.Web.Controllers
     [ApiController]
     public class FitnessPathController : ControllerBase
     {
-
+        private const string controllerName = "FitnessPath";
+        private readonly IConfigurationService configService;
         private readonly IMapper mapper;
         private readonly IFitnessPathRepository fitnessPathRepository;
-        public FitnessPathController(IFitnessPathRepository fitnessPathRepository, IMapper mapper)
+        public FitnessPathController(IFitnessPathRepository fitnessPathRepository, IControllerService controllerService)
         {
             this.fitnessPathRepository = fitnessPathRepository;
-            this.mapper = mapper;
+            this.configService = controllerService.ConfigurationService;
+            this.mapper = controllerService.Mapper;
         }
         /// <summary>
         /// If user id is not supplied, returns paths of current user
@@ -64,8 +67,10 @@ namespace FitnessCelebrity.Web.Controllers
         }
         // POST: api/FitnessPath
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> Post(FitnessPath fitnessPath)
         {
+            var createdFitnessPath = await fitnessPathRepository.Create(fitnessPath);
+            return Created(configService.GenerateCreatedUrl(controllerName, createdFitnessPath.Id), createdFitnessPath);
         }
 
         // PUT: api/FitnessPath/5
@@ -86,6 +91,7 @@ namespace FitnessCelebrity.Web.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            //todo add deleted timestamp
         }
 
         [Route("search")]

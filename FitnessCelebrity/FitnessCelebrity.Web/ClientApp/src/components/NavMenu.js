@@ -1,50 +1,78 @@
-import React, { Component } from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
-import { LoginMenu } from './api-authorization/LoginMenu';
-import './NavMenu.css';
+import React, { Component } from "react";
+import {
+  Collapse,
+  Container,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+  NavItem,
+  NavLink,
+} from "reactstrap";
+import { Link } from "react-router-dom";
+import { LoginMenu } from "./api-authorization/LoginMenu";
+import "./NavMenu.css";
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
-      collapsed: true
+      collapsed: true,
     };
   }
 
-  toggleNavbar () {
+  toggleNavbar() {
     this.setState({
-      collapsed: !this.state.collapsed
+      collapsed: !this.state.collapsed,
     });
   }
 
-  render () {
+  render() {
     return (
       <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
+        <Navbar
+          className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
+          light
+        >
           <Container>
-            <NavbarBrand tag={Link} to="/">Fitness Celebrity</NavbarBrand>
+            <NavbarBrand tag={Link} to="/">
+              Fitness Celebrity
+            </NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-            <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
+            <Collapse
+              className="d-sm-inline-flex flex-sm-row-reverse"
+              isOpen={!this.state.collapsed}
+              navbar
+            >
               <ul className="navbar-nav flex-grow">
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
+                  <NavLink tag={Link} className="text-dark" to="/">
+                    Home
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/search">Search</NavLink>
+                  <NavLink tag={Link} className="text-dark" to="/search">
+                    Search
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/workout/create">Manage Fitness</NavLink>
+                  <NavLink tag={Link} className="text-dark" to="/manage">
+                    Manage Fitness
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/profile/Austin-Test">Profile</NavLink>
+                  <NavLink
+                    tag={Link}
+                    className="text-dark"
+                    to="/profile/Austin-Test"
+                  >
+                    Profile
+                  </NavLink>
                 </NavItem>
-                <LoginMenu>
-                </LoginMenu>
+                <LoginMenu></LoginMenu>
               </ul>
             </Collapse>
           </Container>

@@ -2,10 +2,18 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import TextInput from "../home/TextInput";
+import FitnessPathService from "../../services/FitnessPathService";
+import { useHistory } from "react-router-dom";
 
 function FitnessPathEditForm(props) {
-  const onSubmit = props.onSubmit;
   const values = props.values;
+  let history = useHistory();
+  const handleSave = async (fitnessPath) => {
+    await FitnessPathService.update(fitnessPath);
+    //if success redirect to previous page
+    history.goBack();
+  };
+
   const SignupForm = () => {
     return (
       <>
@@ -20,10 +28,8 @@ function FitnessPathEditForm(props) {
               .required("Required"),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
+            handleSave(values);
+            setSubmitting(false);
           }}
         >
           <Form>

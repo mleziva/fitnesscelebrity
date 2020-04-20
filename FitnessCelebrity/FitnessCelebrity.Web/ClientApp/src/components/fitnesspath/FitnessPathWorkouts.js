@@ -3,10 +3,12 @@ import _ from "lodash";
 import SearchableList from "../home/SearchableList";
 import WorkoutService from "../../services/WorkoutService";
 import FitnessPathService from "../../services/FitnessPathService";
+import { useHistory } from "react-router-dom";
 
 function FitnessPathWorkouts(props) {
   const [availableWorkouts, setAvailableWorkouts] = useState([]);
   const [linkedWorkouts, setLinkedWorkouts] = useState([]);
+  let history = useHistory();
 
   useEffect(() => {
     // Should not ever set state during rendering, so do this in useEffect instead.
@@ -56,6 +58,7 @@ function FitnessPathWorkouts(props) {
     //copy workouts back to main model
     props.fitnessPath.workouts = _.cloneDeep(linkedWorkouts);
     await FitnessPathService.updateLinkedWorkouts(props.fitnessPath);
+    history.goBack();
   };
   return (
     <div>

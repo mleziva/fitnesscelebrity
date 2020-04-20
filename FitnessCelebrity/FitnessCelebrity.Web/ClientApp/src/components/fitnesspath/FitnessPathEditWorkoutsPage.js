@@ -1,19 +1,25 @@
-import React, { Component } from 'react';
-import FitnessPathService from '../../services/FitnessPathService'
-import Spinner from '../home/Spinner'
-import FitnessPathWorkouts from './FitnessPathWorkouts'
-
+import React, { Component } from "react";
+import FitnessPathService from "../../services/FitnessPathService";
+import Spinner from "../home/Spinner";
+import FitnessPathWorkouts from "./FitnessPathWorkouts";
 
 export class FitnessPathEditWorkoutsPage extends Component {
   static displayName = FitnessPathEditWorkoutsPage.name;
 
   constructor(props) {
     super(props);
-    this.state = { fitnessPath: {}, loading: true, isSubscribed: false, isEditing: false };
+    this.state = {
+      fitnessPath: {},
+      loading: true,
+      isSubscribed: false,
+      isEditing: false,
+    };
   }
 
   componentDidMount() {
-    const { match: { params } } = this.props;
+    const {
+      match: { params },
+    } = this.props;
     this.loadFitnessPath(params.fitnessPathId);
   }
   async loadFitnessPath(id) {
@@ -24,19 +30,29 @@ export class FitnessPathEditWorkoutsPage extends Component {
   render() {
     let fitnessPath = this.state.fitnessPath;
 
-    let contents = this.state.loading
-    ? <p><em>Loading...</em></p>
-    : <FitnessPathWorkouts fitnessPath={fitnessPath}/>;
+    let contents = this.state.loading ? (
+      <p>
+        <em>Loading...</em>
+      </p>
+    ) : (
+      <FitnessPathWorkouts fitnessPath={fitnessPath} />
+    );
 
     return (
-    <div>
+      <div>
         <div className="row">
-          <button className="btn btn-primary" onClick={() => this.props.history.goBack()} >Cancel</button>
+          <div className="col">
+            <button
+              className="btn btn-primary"
+              onClick={() => this.props.history.goBack()}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
         <Spinner loading={this.state.loading}></Spinner>
         {contents}
-    </div>
+      </div>
     );
   }
-
 }
