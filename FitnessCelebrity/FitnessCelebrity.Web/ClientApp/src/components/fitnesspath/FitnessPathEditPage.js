@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import FitnessPathService from "../../services/FitnessPathService";
 import SpinnerPage from "../home/SpinnerPage";
-import FitnessPathEditForm from "../fitnesspath/FitnessPathEditForm";
+import FitnessPathForm from "./FitnessPathForm";
 
 export class FitnessPathEditPage extends Component {
   static displayName = FitnessPathEditPage.name;
-
   constructor(props) {
     super(props);
     this.state = { fitnessPath: {}, loading: true };
@@ -21,6 +20,11 @@ export class FitnessPathEditPage extends Component {
     let data = await FitnessPathService.getById(id);
     this.setState({ fitnessPath: data, loading: false });
   }
+  onFitnessPathSave = async (values) => {
+    await FitnessPathService.update(values);
+    //if success redirect to previous page
+    this.props.history.goBack();
+  };
   render() {
     let fitnessPath = this.state.fitnessPath;
     return (
@@ -28,7 +32,7 @@ export class FitnessPathEditPage extends Component {
         <div className="row">
           <div className="col">
             <button
-              className="btn btn-primary"
+              className="btn btn-outline-primary"
               onClick={() => this.props.history.goBack()}
             >
               Cancel
@@ -36,7 +40,10 @@ export class FitnessPathEditPage extends Component {
           </div>
         </div>
         <SpinnerPage loading={this.state.loading}></SpinnerPage>
-        <FitnessPathEditForm values={fitnessPath} />
+        <FitnessPathForm
+          values={fitnessPath}
+          onSubmit={this.onFitnessPathSave}
+        />
       </div>
     );
   }

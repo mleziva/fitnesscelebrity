@@ -7,6 +7,7 @@ const MovementController = "Movement";
 
 export const FitnessPathRoutes = {
   Get: `${prefix}/${fitnessPathController}/`,
+  Create: `${prefix}/${fitnessPathController}/`,
   GetById: `${prefix}/${fitnessPathController}/`,
   Search: `${prefix}/${fitnessPathController}/search`,
   GetSubscribers: `${prefix}/${fitnessPathController}/{fitnesspathid}/subscribers`,

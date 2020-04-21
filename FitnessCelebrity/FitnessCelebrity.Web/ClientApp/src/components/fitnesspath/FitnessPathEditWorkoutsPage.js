@@ -43,7 +43,7 @@ export class FitnessPathEditWorkoutsPage extends Component {
         <div className="row">
           <div className="col">
             <button
-              className="btn btn-primary"
+              className="btn btn-outline-primary"
               onClick={() => this.props.history.goBack()}
             >
               Cancel

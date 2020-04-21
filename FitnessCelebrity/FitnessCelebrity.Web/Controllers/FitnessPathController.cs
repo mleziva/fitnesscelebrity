@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FitnessCelebrity.Web.Dto.FitnessPath;
 using FitnessCelebrity.Web.Extensions;
 using FitnessCelebrity.Web.Models;
 using FitnessCelebrity.Web.Models.Dto;
@@ -67,9 +68,10 @@ namespace FitnessCelebrity.Web.Controllers
         }
         // POST: api/FitnessPath
         [HttpPost]
-        public async Task<ActionResult> Post(FitnessPath fitnessPath)
+        public async Task<ActionResult> Post(DtoFitnessPathCreate fitnessPath)
         {
-            var createdFitnessPath = await fitnessPathRepository.Create(fitnessPath);
+            var path = mapper.Map<FitnessPath>(fitnessPath, opt => { opt.Items["UserId"] = User.Identity.GetId(); });
+            var createdFitnessPath = await fitnessPathRepository.Create(path);
             return Created(configService.GenerateCreatedUrl(controllerName, createdFitnessPath.Id), createdFitnessPath);
         }
 

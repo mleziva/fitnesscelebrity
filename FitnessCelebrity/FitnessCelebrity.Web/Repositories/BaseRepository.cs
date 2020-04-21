@@ -52,5 +52,14 @@ namespace FitnessCelebrity.Web.Repositories
             _dbContext.Set<TEntity>().Update(entity);
             await _dbContext.SaveChangesAsync();
         }
+        public async Task UpdateExcludeCreated<T>(long id, T entity) where T : BaseUserData, TEntity
+        {
+            var ent =await GetById(id) as BaseUserData;
+            entity.Id = id;
+            entity.CreatedById = ent.CreatedById;
+            entity.CreatedDate = ent.CreatedDate;
+            _dbContext.Set<TEntity>().Update(entity);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

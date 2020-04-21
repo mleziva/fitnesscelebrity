@@ -44,14 +44,16 @@ function FitnessPathWorkouts(props) {
   const loadWorkouts = async (linkedWorkouts) => {
     var availableWorkouts = await WorkoutService.getMyCreatedWorkouts();
     //remove all the aleady added workouts from available
-    availableWorkouts = availableWorkouts.filter((aw) => {
-      for (var i = 0, len = linkedWorkouts.length; i < len; i++) {
-        if (linkedWorkouts[i].id === aw.id) {
-          return false;
+    if (linkedWorkouts && linkedWorkouts.length > 0) {
+      availableWorkouts = availableWorkouts.filter((aw) => {
+        for (var i = 0, len = linkedWorkouts.length; i < len; i++) {
+          if (linkedWorkouts[i].id === aw.id) {
+            return false;
+          }
         }
-      }
-      return true;
-    });
+        return true;
+      });
+    }
     setAvailableWorkouts(availableWorkouts);
   };
   const handleSave = async () => {

@@ -2,18 +2,9 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import TextInput from "../home/TextInput";
-import FitnessPathService from "../../services/FitnessPathService";
-import { useHistory } from "react-router-dom";
 
-function FitnessPathEditForm(props) {
-  const values = props.values;
-  let history = useHistory();
-  const handleSave = async (fitnessPath) => {
-    await FitnessPathService.update(fitnessPath);
-    //if success redirect to previous page
-    history.goBack();
-  };
-
+function FitnessPathForm(props) {
+  const values = props.values ?? {};
   const SignupForm = () => {
     return (
       <>
@@ -21,14 +12,14 @@ function FitnessPathEditForm(props) {
           initialValues={values}
           validationSchema={Yup.object({
             name: Yup.string()
-              .max(15, "Must be 15 characters or less")
+              .max(50, "Must be 50 characters or less")
               .required("Required"),
             description: Yup.string()
-              .max(20, "Must be 20 characters or less")
+              .max(50, "Must be 50 characters or less")
               .required("Required"),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            handleSave(values);
+            props.onSubmit(values);
             setSubmitting(false);
           }}
         >
@@ -63,7 +54,9 @@ function FitnessPathEditForm(props) {
               type="text"
               placeholder="cardio fun"
             />
-            <button type="submit">Save</button>
+            <button type="submit" className="btn btn-success">
+              Save
+            </button>
           </Form>
         </Formik>
       </>
@@ -71,4 +64,4 @@ function FitnessPathEditForm(props) {
   };
   return <SignupForm />;
 }
-export default FitnessPathEditForm;
+export default FitnessPathForm;

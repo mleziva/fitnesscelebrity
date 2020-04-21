@@ -6,6 +6,7 @@ import { FetchData } from "./components/FetchData";
 import { CreatePage } from "./components/workout/Create-Page";
 import { FitnessPathPage } from "./components/fitnesspath/FitnessPathPage";
 import { FitnessPathEditPage } from "./components/fitnesspath/FitnessPathEditPage";
+import { FitnessPathCreatePage } from "./components/fitnesspath/FitnessPathCreatePage";
 import { FitnessPathEditWorkoutsPage } from "./components/fitnesspath/FitnessPathEditWorkoutsPage";
 import { WorkoutPage } from "./components/workout/WorkoutPage";
 import { MovementPage } from "./components/movement/MovementPage";
@@ -29,8 +30,13 @@ export default class App extends Component {
         <Route path="/search" component={SearchPage} />
         <Route
           exact
-          path="/fitnessPath/:fitnessPathId"
+          path="/fitnessPath/:fitnessPathId(\d+)"
           component={FitnessPathPage}
+        />
+        <Route
+          exact
+          path="/fitnessPath/create"
+          component={FitnessPathCreatePage}
         />
         <Route
           exact

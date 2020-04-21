@@ -112,7 +112,7 @@ namespace FitnessCelebrity.Web.Repositories
         {
             //set relationship property to null so no changes to workotus are made
             fitnessPath.FitnessPathWorkouts = null;
-            await base.Update(id, fitnessPath);
+            await base.UpdateExcludeCreated(id, fitnessPath);
         }
     }
 }

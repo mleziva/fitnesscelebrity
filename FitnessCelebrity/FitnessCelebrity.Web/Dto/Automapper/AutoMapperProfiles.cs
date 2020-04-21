@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FitnessCelebrity.Web.Dto.FitnessPath;
 using FitnessCelebrity.Web.Models.Dto.UserProfile;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,12 @@ namespace FitnessCelebrity.Web.Models.Dto
             CreateMap<FitnessPathDtoGetWorkouts, FitnessPathWorkout>()
                 .ForMember(d => d.WorkoutId, opt => opt.MapFrom(s => s.Id));
 
-            //CreateMap<FitnessPathDtoGetWorkouts, Workout>();
+            //fitness path - post
+            CreateMap<DtoFitnessPathCreate, FitnessPath>()
+                .ForMember(x => x.CreatedDate, opt => opt.MapFrom(o => DateTimeOffset.UtcNow))
+                .ForMember(x => x.ModifiedDate, opt => opt.MapFrom(o => DateTimeOffset.UtcNow))
+                .ForMember(d => d.CreatedById, opt => opt.MapFrom((src, dst, _, context) => context.Options.Items["UserId"]))
+                .ForMember(d => d.ModifiedById, opt => opt.MapFrom((src, dst, _, context) => context.Options.Items["UserId"]));
 
             //user profile
             CreateMap<DtoCreateUserProfile, Models.UserProfile>()

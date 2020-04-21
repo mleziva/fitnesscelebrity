@@ -12,7 +12,7 @@ namespace FitnessCelebrity.Web.Services
 
         public string GenerateCreatedUrl(string controllerName, long id)
         {
-            return $"{Url}/api/{controllerName}{id}";
+            return $"{Url}api/{controllerName}/{id}";
         }
     }
 }
