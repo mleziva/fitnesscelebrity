@@ -1,9 +1,9 @@
-const prefix = '/api';
-const fitnessPathController = 'FitnessPath'
-const fitSubscriptionController = 'FitnessPathSubscription'
-const workoutController = 'Workout'
-const ProfileController = 'UserProfile'
-const MovementController = 'Movement'
+const prefix = "/api";
+const fitnessPathController = "FitnessPath";
+const fitSubscriptionController = "FitnessPathSubscription";
+const workoutController = "Workout";
+const ProfileController = "UserProfile";
+const MovementController = "Movement";
 
 export const FitnessPathRoutes = {
   Get: `${prefix}/${fitnessPathController}/`,
@@ -16,15 +16,14 @@ export const FitnessPathRoutes = {
 };
 
 export const WorkoutRoutes = {
-    CreateWorkout: `${prefix}/${workoutController}`,
-    GetById: `${prefix}/${workoutController}/`,
-    Get: `${prefix}/${workoutController}/`,
-    Search: `${prefix}/${workoutController}/search`
-  };
+  CreateWorkout: `${prefix}/${workoutController}`,
+  GetById: `${prefix}/${workoutController}/`,
+  Get: `${prefix}/${workoutController}/`,
+  Search: `${prefix}/${workoutController}/search`,
+};
 
 export const ProfileRoutes = {
   GetProfile: `${prefix}/${ProfileController}/username/`,
- 
 };
 
 export const FitSubscriptionRoutes = {
@@ -33,6 +32,6 @@ export const FitSubscriptionRoutes = {
 
 export const MovementRoutes = {
   GetById: `${prefix}/${MovementController}/`,
-  Search: `${prefix}/${MovementController}/search`
+  Get: `${prefix}/${MovementController}/`,
+  Search: `${prefix}/${MovementController}/search`,
 };
-  

@@ -5,19 +5,19 @@ import Spinner from "../home/Spinner";
 
 function FitnessPathListGroup(props) {
   const [loading, setLoading] = useState(true);
-  let fitnessPaths = [];
+  const [fitnessPaths, setFitnessPaths] = useState([]);
 
   useEffect(() => {
     loadFitnessPaths();
   }, []);
 
   const loadFitnessPaths = async () => {
-    fitnessPaths = await FitnessPathService.get();
+    let results = await FitnessPathService.get();
     setLoading(false);
+    setFitnessPaths(results);
   };
-
-  return (
-    <>
+  const renderListGroup = () => {
+    return (
       <ul className="list-group">
         {fitnessPaths.map((fitnessPath) => (
           <li className="list-group-item" key={fitnessPath.id}>
@@ -25,8 +25,9 @@ function FitnessPathListGroup(props) {
           </li>
         ))}
       </ul>
-    </>
-  );
+    );
+  };
+  return <>{loading ? <Spinner /> : renderListGroup()}</>;
 }
 
 export default FitnessPathListGroup;

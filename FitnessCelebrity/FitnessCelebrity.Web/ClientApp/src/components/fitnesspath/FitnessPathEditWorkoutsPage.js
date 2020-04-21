@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import FitnessPathService from "../../services/FitnessPathService";
-import Spinner from "../home/Spinner";
+import SpinnerPage from "../home/SpinnerPage";
 import FitnessPathWorkouts from "./FitnessPathWorkouts";
 
 export class FitnessPathEditWorkoutsPage extends Component {
@@ -50,7 +50,7 @@ export class FitnessPathEditWorkoutsPage extends Component {
             </button>
           </div>
         </div>
-        <Spinner loading={this.state.loading}></Spinner>
+        <SpinnerPage loading={this.state.loading}></SpinnerPage>
         {contents}
       </div>
     );

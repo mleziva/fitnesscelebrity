@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Spinner from '../../components/home/Spinner'
-import SpanRow from '../../components/home/SpanRow'
-import WorkoutService from '../../services/WorkoutService'
+import React, { Component } from "react";
+import SpinnerPage from "../../components/home/SpinnerPage";
+import SpanRow from "../../components/home/SpanRow";
+import WorkoutService from "../../services/WorkoutService";
 
 export class WorkoutPage extends Component {
   static displayName = WorkoutPage.name;
@@ -12,7 +12,9 @@ export class WorkoutPage extends Component {
   }
 
   componentDidMount() {
-    const { match: { params } } = this.props;
+    const {
+      match: { params },
+    } = this.props;
     this.loadWorkout(params.workoutId);
   }
   async loadWorkout(id) {
@@ -24,15 +26,14 @@ export class WorkoutPage extends Component {
     let workout = this.state.workout;
     return (
       <div>
-          <Spinner loading={this.state.loading}></Spinner>
+        <SpinnerPage loading={this.state.loading}></SpinnerPage>
         <form>
-            <SpanRow value={workout.name} label={"Name"}/>
-            <SpanRow value={workout.description} label={"Description"}/>
-            <SpanRow value={workout.body} label={"Body"}/>
-            <SpanRow value={workout.tags} label={"Tags"}/>
+          <SpanRow value={workout.name} label={"Name"} />
+          <SpanRow value={workout.description} label={"Description"} />
+          <SpanRow value={workout.body} label={"Body"} />
+          <SpanRow value={workout.tags} label={"Tags"} />
         </form>
       </div>
     );
   }
-
 }
