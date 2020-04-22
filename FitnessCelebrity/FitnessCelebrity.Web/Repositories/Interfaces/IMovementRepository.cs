@@ -12,5 +12,7 @@ namespace FitnessCelebrity.Web.Repositories.Interfaces
     {
         Task<PagingList<Movement>> Get(PageableUserIdRequest request);
         Task<PagingList<Movement>> Search(PageableQueryRequest request);
+        Task UpdateWorkouts(long id, Movement movement);
+        Task UpdateEntity(long id, Movement movement);
     }
 }

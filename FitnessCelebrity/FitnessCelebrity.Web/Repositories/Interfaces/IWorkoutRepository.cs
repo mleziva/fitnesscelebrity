@@ -11,6 +11,10 @@ namespace FitnessCelebrity.Web.Repositories
     public interface IWorkoutRepository : IBaseRepository<Workout>
     {
         Task<PagingList<Workout>> Get(PageableUserIdRequest request);
+        Task UpdateFitnessPaths(long id, Workout workout);
+        Task UpdateMovements(long id, Workout workout);
+        Task UpdateEntity(long id, Workout workout);
+
         Task<PagingList<Workout>> SearchWorkouts(PageableQueryRequest request);
     }
 }

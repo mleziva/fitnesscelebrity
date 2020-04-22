@@ -56,12 +56,24 @@ namespace FitnessCelebrity.Web.Controllers
             return Created(configService.GenerateCreatedUrl(controllerName, createdWorkout.Id), createdWorkout);
         }
 
-        // PUT: api/Workout/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task Put(long id, WorkoutDtoCreate workout)
         {
+            var workoutEntity = mapper.Map<Workout>(workout, opt => { opt.Items["UserId"] = User.Identity.GetId(); });
+            await repository.UpdateEntity(id, workoutEntity);
         }
-
+        [HttpPut("{id}/fitnesspaths")]
+        public async Task UpdateFitnessPaths(long id, WorkoutDtoCreate workout)
+        {
+            var workoutEntity = mapper.Map<Workout>(workout, opt => { opt.Items["UserId"] = User.Identity.GetId(); });
+            await repository.UpdateFitnessPaths(id, workoutEntity);
+        }
+        [HttpPut("{id}/movements")]
+        public async Task UpdateMovements(long id, WorkoutDtoCreate workout)
+        {
+            var workoutEntity = mapper.Map<Workout>(workout, opt => { opt.Items["UserId"] = User.Identity.GetId(); });
+            await repository.UpdateMovements(id, workoutEntity);
+        }
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
