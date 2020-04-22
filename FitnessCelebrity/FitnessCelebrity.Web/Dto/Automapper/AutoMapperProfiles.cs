@@ -70,6 +70,15 @@ namespace FitnessCelebrity.Web.Models.Dto
                 .ForMember(x => x.FitnessPaths, opt => opt.MapFrom(src => src.FitnessPathWorkouts.Select(w => w.FitnessPath)))
                 .ForMember(x => x.Movements, opt => opt.MapFrom(src => src.WorkoutMovements.Select(w => w.Movement)));
 
+            //update
+            CreateMap<DtoWorkoutGet, Workout>()
+                .ForMember(x => x.ModifiedById, opt => opt.MapFrom((src, dst, _, context) => context.Options.Items["UserId"]))
+                .ForMember(x => x.ModifiedDate, opt => opt.MapFrom(o => DateTimeOffset.UtcNow))
+                .ForMember(x => x.FitnessPathWorkouts, opt => opt.MapFrom(src => src.FitnessPaths));
+
+            CreateMap<DtoFitnessPathLink, FitnessPathWorkout>()
+                .ForMember(d => d.FitnessPathId, opt => opt.MapFrom(s => s.Id));
+
             #endregion
 
             #region fitnesspath controller

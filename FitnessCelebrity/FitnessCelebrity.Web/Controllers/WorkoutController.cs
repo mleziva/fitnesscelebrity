@@ -64,13 +64,13 @@ namespace FitnessCelebrity.Web.Controllers
             await repository.UpdateEntity(id, workoutEntity);
         }
         [HttpPut("{id}/fitnesspaths")]
-        public async Task UpdateFitnessPaths(long id, WorkoutDtoCreate workout)
+        public async Task UpdateFitnessPaths(long id, DtoWorkoutGet workout)
         {
             var workoutEntity = mapper.Map<Workout>(workout, opt => { opt.Items["UserId"] = User.Identity.GetId(); });
             await repository.UpdateFitnessPaths(id, workoutEntity);
         }
         [HttpPut("{id}/movements")]
-        public async Task UpdateMovements(long id, WorkoutDtoCreate workout)
+        public async Task UpdateMovements(long id, DtoWorkoutGet workout)
         {
             var workoutEntity = mapper.Map<Workout>(workout, opt => { opt.Items["UserId"] = User.Identity.GetId(); });
             await repository.UpdateMovements(id, workoutEntity);

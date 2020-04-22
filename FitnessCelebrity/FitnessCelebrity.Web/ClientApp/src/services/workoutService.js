@@ -36,6 +36,13 @@ export class WorkoutService {
     );
     const response = await HttpClient.put(url, workout);
   }
+  async updateFitnessPaths(workout) {
+    const url = WorkoutRoutes.UpdateFitnessPaths.replace(
+      "{workoutId}",
+      workout.id
+    );
+    const response = await HttpClient.put(url, workout);
+  }
   async create(workout) {
     const url = WorkoutRoutes.Create;
     const response = await HttpClient.post(url, workout);

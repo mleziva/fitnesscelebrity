@@ -1,18 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-function WorkoutList(props) {
-  const workouts = props.workouts ?? [];
+
+function LinkList(props) {
+  const items = props.items ?? [];
+  const path = props.path;
   return (
     <div className=" row">
       <div className="col">
         <div className="list-group">
-          {workouts.map((workout) => (
+          {items.map((item) => (
             <Link
-              key={workout.id}
-              to={"/workout/" + workout.id}
+              key={item.id}
+              to={"/" + path + "/" + item.id}
               className="list-group-item list-group-item-action"
             >
-              {workout.name} <small>{workout.description}</small>
+              {item.name} <small>{item.description}</small>
             </Link>
           ))}
         </div>
@@ -20,4 +22,4 @@ function WorkoutList(props) {
     </div>
   );
 }
-export default WorkoutList;
+export default LinkList;

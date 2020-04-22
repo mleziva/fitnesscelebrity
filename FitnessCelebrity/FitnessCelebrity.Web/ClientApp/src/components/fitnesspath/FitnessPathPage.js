@@ -59,7 +59,7 @@ export class FitnessPathPage extends Component {
           <div className="col-sm-2 offset-sm-6">
             <Link
               className="btn btn-primary"
-              to={this.props.location.pathname + "/edit/workouts"}
+              to={this.props.location.pathname + "/workouts/edit"}
             >
               Edit
             </Link>

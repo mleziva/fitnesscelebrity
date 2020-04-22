@@ -27,7 +27,7 @@ function FitnessPathRoutes(props) {
       />
       <Route
         exact
-        path="/fitnessPath/:fitnessPathId/edit/workouts"
+        path="/fitnessPath/:fitnessPathId/workouts/edit"
         component={FitnessPathEditWorkoutsPage}
       />
     </>

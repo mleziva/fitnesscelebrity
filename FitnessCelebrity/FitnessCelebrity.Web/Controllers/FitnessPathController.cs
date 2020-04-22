@@ -82,7 +82,7 @@ namespace FitnessCelebrity.Web.Controllers
             var path = mapper.Map<FitnessPath>(fitnessPath, opt => { opt.Items["UserId"] = User.Identity.GetId(); });
             await fitnessPathRepository.UpdateEntity(id, path);
         }
-        [HttpPut("workouts/{id}")]
+        [HttpPut("{id}/workouts")]
         public async Task UpdateWorkouts(long id, DtoFitnessPath fitnessPath)
         {
             var path = mapper.Map<FitnessPath>(fitnessPath, opt => { opt.Items["UserId"] = User.Identity.GetId(); });
