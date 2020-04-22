@@ -40,13 +40,13 @@ namespace FitnessCelebrity.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetAsync(int id)
+        public async Task<ActionResult<DtoMovementGet>> GetAsync(int id)
         {
             var movement = await repository.GetById(id);
             if (movement == null)
                 return NotFound();
-
-            return Ok(movement);
+            var movementDto = mapper.Map<DtoMovementGet>(movement);
+            return Ok(movementDto);
         }
 
         [HttpPost]

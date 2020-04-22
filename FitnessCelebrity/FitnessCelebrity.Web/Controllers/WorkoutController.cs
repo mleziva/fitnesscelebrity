@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FitnessCelebrity.Web.Dto.Workout;
 using FitnessCelebrity.Web.Extensions;
 using FitnessCelebrity.Web.Models;
 using FitnessCelebrity.Web.Models.Dto;
@@ -38,13 +39,13 @@ namespace FitnessCelebrity.Web.Controllers
 
         // GET: api/Workout/5
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetAsync(int id)
+        public async Task<ActionResult<DtoWorkoutGet>> GetAsync(int id)
         {
             var workout = await repository.GetById(id);
             if (workout == null)
                 return NotFound();
-
-            return Ok(workout);
+            var workoutDto = mapper.Map<DtoWorkoutGet>(workout);
+            return Ok(workoutDto);
         }
 
         // POST: api/Workout

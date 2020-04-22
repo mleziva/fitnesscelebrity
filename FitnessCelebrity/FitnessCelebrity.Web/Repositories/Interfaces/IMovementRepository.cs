@@ -11,6 +11,7 @@ namespace FitnessCelebrity.Web.Repositories.Interfaces
     public interface IMovementRepository : IBaseRepository<Movement>
     {
         Task<PagingList<Movement>> Get(PageableUserIdRequest request);
+        new Task<Movement> GetById(long id);
         Task<PagingList<Movement>> Search(PageableQueryRequest request);
         Task UpdateWorkouts(long id, Movement movement);
         Task UpdateEntity(long id, Movement movement);

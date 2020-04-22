@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using FitnessCelebrity.Web.Dto.FitnessPath;
+using FitnessCelebrity.Web.Dto.Movement;
+using FitnessCelebrity.Web.Dto.Workout;
 using FitnessCelebrity.Web.Models.Dto.UserProfile;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,7 @@ namespace FitnessCelebrity.Web.Models.Dto
     {
         public AutoMapperProfiles()
         {
+            #region dto create
             //CreateMap<Source, Destination>
             //Mapper.Map<Dest>(src, opt => { opt.Items["UserId"] = "my-guid-123";});
             CreateMap<MovementDtoCreate, Movement>()
@@ -31,21 +34,10 @@ namespace FitnessCelebrity.Web.Models.Dto
                 .ForMember(d => d.ModifiedById, opt => opt.MapFrom((src, dst, _, context) => context.Options.Items["UserId"]));
             CreateMap<FitnessPathWorkoutDtoCreate, FitnessPathWorkout>();
             CreateMap<WorkoutMovementDtoCreate, WorkoutMovement>();
+            #endregion
 
-            //Get
-            CreateMap<FitnessPath, DtoFitnessPath>()
-                .ForMember(x => x.CreatedByUserName, opt => opt.MapFrom(src => src.CreatedByUser.UserProfile.UserName))
-                .ForMember(x => x.Workouts, opt => opt.MapFrom(src => src.FitnessPathWorkouts.Select(w => w.Workout)));
-
-            CreateMap<Workout, FitnessPathDtoGetWorkouts>();
-            //update
-            CreateMap<DtoFitnessPath, FitnessPath>()
-                .ForMember(x=>x.ModifiedById, opt => opt.MapFrom((src, dst, _, context) => context.Options.Items["UserId"]))
-                .ForMember(x => x.ModifiedDate, opt => opt.MapFrom(o => DateTimeOffset.UtcNow))
-                .ForMember(x => x.FitnessPathWorkouts, opt => opt.MapFrom(src => src.Workouts));
-
-            CreateMap<FitnessPathDtoGetWorkouts, FitnessPathWorkout>()
-                .ForMember(d => d.WorkoutId, opt => opt.MapFrom(s => s.Id));
+          
+            
 
             //fitness path - post
             CreateMap<DtoFitnessPathCreate, FitnessPath>()
@@ -58,6 +50,45 @@ namespace FitnessCelebrity.Web.Models.Dto
             CreateMap<DtoCreateUserProfile, Models.UserProfile>()
                 .ForMember(x => x.CreatedDate, opt => opt.MapFrom(o => DateTimeOffset.UtcNow))
                 .ForMember(x => x.ModifiedDate, opt => opt.MapFrom(o => DateTimeOffset.UtcNow));
+
+            #region movement controller
+            
+            CreateMap<Movement, DtoMovementLink>();
+            //Get
+            CreateMap<Movement, DtoMovementGet>()
+                .ForMember(x => x.CreatedByUserName, opt => opt.MapFrom(src => src.CreatedByUser.UserProfile.UserName))
+                .ForMember(x => x.Workouts, opt => opt.MapFrom(src => src.WorkoutMovements.Select(w => w.Workout)));
+
+            #endregion
+
+            #region workout controller
+            //general
+            CreateMap<Workout, DtoWorkoutLink>();
+            //Get
+            CreateMap<Workout, DtoWorkoutGet>()
+                .ForMember(x => x.CreatedByUserName, opt => opt.MapFrom(src => src.CreatedByUser.UserProfile.UserName))
+                .ForMember(x => x.FitnessPaths, opt => opt.MapFrom(src => src.FitnessPathWorkouts.Select(w => w.FitnessPath)))
+                .ForMember(x => x.Movements, opt => opt.MapFrom(src => src.WorkoutMovements.Select(w => w.Movement)));
+
+            #endregion
+
+            #region fitnesspath controller
+            CreateMap<FitnessPath, DtoFitnessPathLink>();
+            //Get
+            CreateMap<FitnessPath, DtoFitnessPath>()
+                .ForMember(x => x.CreatedByUserName, opt => opt.MapFrom(src => src.CreatedByUser.UserProfile.UserName))
+                .ForMember(x => x.Workouts, opt => opt.MapFrom(src => src.FitnessPathWorkouts.Select(w => w.Workout)));
+
+
+            //update
+            CreateMap<DtoFitnessPath, FitnessPath>()
+                .ForMember(x => x.ModifiedById, opt => opt.MapFrom((src, dst, _, context) => context.Options.Items["UserId"]))
+                .ForMember(x => x.ModifiedDate, opt => opt.MapFrom(o => DateTimeOffset.UtcNow))
+                .ForMember(x => x.FitnessPathWorkouts, opt => opt.MapFrom(src => src.Workouts));
+
+            CreateMap<DtoWorkoutLink, FitnessPathWorkout>()
+                .ForMember(d => d.WorkoutId, opt => opt.MapFrom(s => s.Id));
+            #endregion
 
         }
     }

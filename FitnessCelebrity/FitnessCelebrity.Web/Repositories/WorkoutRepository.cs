@@ -21,7 +21,16 @@ namespace FitnessCelebrity.Web.Repositories
         {
             return await PagingList<Workout>.CreateAsync(GetAll().Where(x => x.CreatedById == request.UserId), request.Page, request.Size);
         }
-
+        public new async Task<Workout> GetById(long id)
+        {
+            return await GetAll()
+                .Include(i => i.WorkoutMovements)
+                .ThenInclude(i => i.Movement)
+                .Include(i => i.FitnessPathWorkouts)
+                .ThenInclude(i => i.FitnessPath)
+                .Include(i => i.CreatedByUser.UserProfile)
+                .FirstOrDefaultAsync(e => e.Id == id);
+        }
         public async Task UpdateFitnessPaths(long id, Workout workout)
         {
             var newFitnessPaths = workout.FitnessPathWorkouts;
