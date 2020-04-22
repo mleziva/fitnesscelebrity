@@ -3,13 +3,9 @@ import { Route } from "react-router";
 import { Layout } from "./components/Layout";
 import { Home } from "./components/Home";
 import { FetchData } from "./components/FetchData";
-import { CreatePage } from "./components/workout/Create-Page";
-import { FitnessPathPage } from "./components/fitnesspath/FitnessPathPage";
-import { FitnessPathEditPage } from "./components/fitnesspath/FitnessPathEditPage";
-import { FitnessPathCreatePage } from "./components/fitnesspath/FitnessPathCreatePage";
-import { FitnessPathEditWorkoutsPage } from "./components/fitnesspath/FitnessPathEditWorkoutsPage";
-import { WorkoutPage } from "./components/workout/WorkoutPage";
-import { MovementPage } from "./components/movement/MovementPage";
+import FitnessPathRoutes from "./app/routes/fitnessPath";
+import MovementRoutes from "./app/routes/movement";
+import WorkoutRoutes from "./app/routes/workout";
 import { ManagePage } from "./components/manage/managePage";
 import { ProfilePage } from "./components/profile/profilepage";
 import { SearchPage } from "./components/search/SearchPage";
@@ -28,31 +24,10 @@ export default class App extends Component {
       <Layout>
         <Route exact path="/" component={Home} />
         <Route path="/search" component={SearchPage} />
-        <Route
-          exact
-          path="/fitnessPath/:fitnessPathId(\d+)"
-          component={FitnessPathPage}
-        />
-        <Route
-          exact
-          path="/fitnessPath/create"
-          component={FitnessPathCreatePage}
-        />
-        <Route
-          exact
-          path="/fitnessPath/:fitnessPathId/edit"
-          component={FitnessPathEditPage}
-        />
-        <Route
-          exact
-          path="/fitnessPath/:fitnessPathId/edit/workouts"
-          component={FitnessPathEditWorkoutsPage}
-        />
+        <FitnessPathRoutes />
+        <MovementRoutes />
+        <WorkoutRoutes />
         <Route exact path="/manage" component={ManagePage} />
-
-        <Route path="/workout/create" component={CreatePage} />
-        <Route path="/workout/:workoutId" component={WorkoutPage} />
-        <Route path="/movement/:movementId" component={MovementPage} />
         <Route path="/profile/:profileUserName" component={ProfilePage} />
         <AuthorizeRoute path="/fetch-data" component={FetchData} />
         <Route
