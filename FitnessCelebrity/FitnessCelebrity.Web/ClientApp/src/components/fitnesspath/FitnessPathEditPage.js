@@ -22,8 +22,7 @@ export class FitnessPathEditPage extends Component {
   }
   onFitnessPathSave = async (values) => {
     await FitnessPathService.update(values);
-    //if success redirect to previous page
-    this.props.history.goBack();
+    this.props.history.push(`/fitnesspath/${this.state.fitnessPath.id}`);
   };
   render() {
     let fitnessPath = this.state.fitnessPath;

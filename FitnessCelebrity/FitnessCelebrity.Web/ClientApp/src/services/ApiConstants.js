@@ -34,5 +34,8 @@ export const FitSubscriptionRoutes = {
 export const MovementRoutes = {
   GetById: `${prefix}/${MovementController}/`,
   Get: `${prefix}/${MovementController}/`,
+  Create: `${prefix}/${MovementController}/`,
+  Update: `${prefix}/${MovementController}/{movementId}`,
+  UpdateWorkouts: `${prefix}/${MovementController}/{movementId}/workouts/`,
   Search: `${prefix}/${MovementController}/search`,
 };

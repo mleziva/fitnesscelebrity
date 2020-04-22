@@ -60,7 +60,7 @@ export class ManagePage extends Component {
           </div>
           <div className="col-sm-6">
             <Link
-              to="/workout/create"
+              to="/movement/create"
               className="btn btn-outline-primary float-right"
             >
               Create New Movement
@@ -70,7 +70,7 @@ export class ManagePage extends Component {
         <div className="row">
           <div className="col">
             <EsTable
-              loadItems={() => MovementService.get()}
+              loadItems={() => MovementService.getMyCreatedMovements()}
               detailsPath={"movement"}
             />
           </div>
