@@ -20,6 +20,9 @@ export const WorkoutRoutes = {
   CreateWorkout: `${prefix}/${workoutController}`,
   GetById: `${prefix}/${workoutController}/`,
   Get: `${prefix}/${workoutController}/`,
+  Create: `${prefix}/${workoutController}/`,
+  Update: `${prefix}/${workoutController}/{workoutId}`,
+  UpdateMovements: `${prefix}/${workoutController}/{workoutId}/movements/`,
   Search: `${prefix}/${workoutController}/search`,
 };
 

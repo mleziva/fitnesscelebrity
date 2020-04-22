@@ -1,4 +1,5 @@
 import { WorkoutPage } from "./WorkoutPage";
-import { CreatePage } from "./Create-Page";
+import { WorkoutCreatePage } from "./WorkoutCreatePage";
+import { WorkoutEditPage } from "./WorkoutEditPage";
 
-export { WorkoutPage, CreatePage };
+export { WorkoutPage, WorkoutCreatePage, WorkoutEditPage };
