@@ -5,6 +5,7 @@ import SpinnerPage from "../home/SpinnerPage";
 import WorkoutList from "../workout/WorkoutList";
 import FitnessPathDetails from "./FitnessPathDetails";
 import { Link } from "react-router-dom";
+import WorkoutScheduleTable from "../workoutschedule/WorkoutScheduleTable";
 
 export class FitnessPathPage extends Component {
   static displayName = FitnessPathPage.name;
@@ -65,6 +66,8 @@ export class FitnessPathPage extends Component {
             </Link>
           </div>
         </div>
+        <WorkoutScheduleTable workouts={fitnessPath.workouts} />
+
         <WorkoutList workouts={fitnessPath.workouts} />
       </div>
     );

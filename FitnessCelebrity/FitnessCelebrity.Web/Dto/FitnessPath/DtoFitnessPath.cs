@@ -1,4 +1,5 @@
-﻿using FitnessCelebrity.Web.Dto.Workout;
+﻿using FitnessCelebrity.Web.Dto.FitnessPathWorkout;
+using FitnessCelebrity.Web.Dto.Workout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace FitnessCelebrity.Web.Models.Dto
         public long Id { get; set; }
         public string Category { get; set; }
         public string CreatedByUserName { get; set; }
-        public IList<DtoWorkoutLink> Workouts { get; set; }
+        public IList<DtoWorkoutSchedule> Workouts { get; set; }
     }
 }
