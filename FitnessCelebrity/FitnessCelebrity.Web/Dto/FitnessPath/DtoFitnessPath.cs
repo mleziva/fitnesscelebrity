@@ -13,6 +13,7 @@ namespace FitnessCelebrity.Web.Models.Dto
         public long Id { get; set; }
         public string Category { get; set; }
         public string CreatedByUserName { get; set; }
+        public WorkoutSchedule WorkoutSchedule { get; set; }
         public IList<DtoWorkoutSchedule> Workouts { get; set; }
     }
 }

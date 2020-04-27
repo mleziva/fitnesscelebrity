@@ -5,7 +5,7 @@ import SpinnerPage from "../home/SpinnerPage";
 import WorkoutList from "../workout/WorkoutList";
 import FitnessPathDetails from "./FitnessPathDetails";
 import { Link } from "react-router-dom";
-import WorkoutScheduleTable from "../workoutschedule/WorkoutScheduleTable";
+import WorkoutScheduleTableSelector from "../workoutschedule/WorkoutScheduleTableSelector";
 
 export class FitnessPathPage extends Component {
   static displayName = FitnessPathPage.name;
@@ -55,7 +55,7 @@ export class FitnessPathPage extends Component {
         <FitnessPathDetails fitnessPath={fitnessPath} />
         <div className="row">
           <div className="col-sm-4">
-            <h2>Linked Workouts</h2>
+            <h2>Workout Schedule</h2>
           </div>
           <div className="col-sm-2 offset-sm-6">
             <Link
@@ -66,9 +66,10 @@ export class FitnessPathPage extends Component {
             </Link>
           </div>
         </div>
-        <WorkoutScheduleTable workouts={fitnessPath.workouts} />
-
-        <WorkoutList workouts={fitnessPath.workouts} />
+        <WorkoutScheduleTableSelector
+          workoutSchedule={fitnessPath.workoutSchedule}
+          workouts={fitnessPath.workouts}
+        />
       </div>
     );
   }
