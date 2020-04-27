@@ -27,8 +27,7 @@ namespace FitnessCelebrity.Web.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<FitnessPathWorkout>().HasKey(sc => new { sc.FitnessPathId, sc.WorkoutId });
-            modelBuilder.Entity<WorkoutMovement>().HasKey(sc => new { sc.WorkoutId, sc.MovementId });
+            
 
             //many-to-many relationship for entities
             modelBuilder.Entity<FitnessPathWorkout>()
@@ -41,6 +40,19 @@ namespace FitnessCelebrity.Web.Data
                 .HasOne<Workout>(sc => sc.Workout)
                 .WithMany(s => s.FitnessPathWorkouts)
                 .HasForeignKey(sc => sc.WorkoutId);
+
+            modelBuilder.Entity<FitnessPathWorkout>()
+          .HasOne<ApplicationUser>(s => s.CreatedByUser)
+          .WithMany(g => g.CreatedFitnessPathWorkouts)
+          .HasForeignKey(s => s.CreatedById);
+
+            modelBuilder.Entity<FitnessPathWorkout>()
+             .HasOne<ApplicationUser>(s => s.ModifiedByUser)
+             .WithMany(g => g.ModifiedFitnessPathWorkouts)
+             .HasForeignKey(s => s.ModifiedById);
+
+
+            modelBuilder.Entity<WorkoutMovement>().HasKey(sc => new { sc.WorkoutId, sc.MovementId });
 
             modelBuilder.Entity<WorkoutMovement>()
             .HasOne<Workout>(sc => sc.Workout)

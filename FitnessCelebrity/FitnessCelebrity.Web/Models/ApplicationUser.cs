@@ -28,5 +28,8 @@ namespace FitnessCelebrity.Web.Models
         public virtual IList<WorkoutHistory> WorkoutHistories { get; set; }
         public virtual IList<DailyLog> DailyLogs { get; set; }
 
+        public virtual IList<FitnessPathWorkout> CreatedFitnessPathWorkouts { get; set; }
+        public virtual IList<FitnessPathWorkout> ModifiedFitnessPathWorkouts { get; set; }
+
     }
 }

@@ -13,7 +13,7 @@ export const FitnessPathRoutes = {
   GetSubscribers: `${prefix}/${fitnessPathController}/{fitnesspathid}/subscribers`,
   GetSubscribedPaths: `${prefix}/${fitnessPathController}/subscription/{userid}`,
   Update: `${prefix}/${fitnessPathController}/{fitnesspathid}`,
-  UpdateWorkouts: `${prefix}/${fitnessPathController}{fitnesspathid}/workouts`,
+  UpdateWorkouts: `${prefix}/${fitnessPathController}/{fitnesspathid}/workouts`,
 };
 
 export const WorkoutRoutes = {

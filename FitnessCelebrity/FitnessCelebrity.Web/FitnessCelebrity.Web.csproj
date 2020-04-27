@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200415204525_dailylog.cs" />
     <Compile Remove="Migrations\20200415204525_dailylog.Designer.cs" />
+    <Compile Remove="Migrations\20200427192133_FPEnhance.cs" />
+    <Compile Remove="Migrations\20200427192133_FPEnhance.Designer.cs" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
