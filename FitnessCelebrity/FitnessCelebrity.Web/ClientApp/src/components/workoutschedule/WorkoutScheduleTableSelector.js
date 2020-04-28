@@ -7,15 +7,29 @@ function WorkoutScheduleTableSelector(props) {
   const workouts = props.workouts ?? [];
   const workoutSchedule = props.workoutSchedule;
   const edit = props.edit ?? false;
-  //create link from name
-  workouts.forEach(function (workout) {
-    workout.link = <Link to={"/workout/" + workout.id}>{workout.name}</Link>;
+  const onRemoveClick = props.onRemoveClick;
+  //create link from name and add incremementing id
+  workouts.forEach(function (workout, index) {
+    workout.listId = index;
   });
   const columns = [
+    {
+      dataField: "listId",
+      text: "Id",
+      hidden: false,
+    },
+    {
+      dataField: "workoutId",
+      text: "Workout Id",
+      hidden: true,
+    },
     {
       dataField: "link",
       text: "Name",
       editable: false,
+      formatter: (cellContent, row) => {
+        return <Link to={"/workout/" + row.workoutId}>{row.workoutName}</Link>;
+      },
     },
   ];
 
@@ -48,11 +62,27 @@ function WorkoutScheduleTableSelector(props) {
       }
     );
   }
-
   columns.push({
     dataField: "notes",
     text: "Notes",
   });
+
+  if (edit) {
+    columns.push({
+      dataField: "listId",
+      editable: false,
+      formatter: (cellContent, row) => {
+        return (
+          <button
+            className="btn btn-danger btn-xs"
+            onClick={() => onRemoveClick(row.listId)}
+          >
+            Delete
+          </button>
+        );
+      },
+    });
+  }
 
   return (
     <WorkoutScheduleTable workouts={workouts} columns={columns} edit={edit} />

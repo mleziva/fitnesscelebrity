@@ -10,6 +10,7 @@ namespace FitnessCelebrity.Web.Dto.FitnessPathWorkout
         public long FitnessPathId { get; set; }
         public long WorkoutId { get; set; }
         //Sun, Mon, Tues, Week 1
+        public string WorkoutName { get; set; }
         public string DayOfWeek { get; set; }
         public int? Week { get; set; }
         //specific date

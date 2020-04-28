@@ -10,7 +10,7 @@ function WorkoutScheduleTable(props) {
   if (edit) {
     return (
       <BootstrapTable
-        keyField="id"
+        keyField="listId"
         data={workouts}
         columns={columns}
         cellEdit={cellEditFactory({
@@ -20,7 +20,9 @@ function WorkoutScheduleTable(props) {
       />
     );
   } else {
-    return <BootstrapTable keyField="id" data={workouts} columns={columns} />;
+    return (
+      <BootstrapTable keyField="listId" data={workouts} columns={columns} />
+    );
   }
 }
 export default WorkoutScheduleTable;

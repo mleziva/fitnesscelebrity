@@ -103,9 +103,8 @@ namespace FitnessCelebrity.Web.Models.Dto
 
             //fitnesspathworkout
             //general
-            CreateMap<FitnessPathWorkout, DtoWorkoutSchedule>()
-             .ForMember(x => x.Id, opt => opt.MapFrom(src => src.WorkoutId))
-             .ForMember(x => x.Name, opt => opt.MapFrom(src => src.Workout.Name));
+            CreateMap<FitnessPathWorkout, DtoFitnessPathWorkout>()
+             .ForMember(x => x.WorkoutName, opt => opt.MapFrom(src => src.Workout.Name));
             //insert
             CreateMap<DtoFitnessPathWorkout, FitnessPathWorkout>()
                 .ForMember(x => x.CreatedDate, opt => opt.MapFrom(o => DateTimeOffset.UtcNow))

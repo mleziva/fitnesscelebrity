@@ -43,3 +43,7 @@ export const MovementRoutes = {
   UpdateWorkouts: `${prefix}/${MovementController}/{movementId}/workouts/`,
   Search: `${prefix}/${MovementController}/search`,
 };
+
+export const WorkoutScheduleRoutes = {
+  Update: "/api/FitnessPathWorkout/fitnessPath/{id}/workouts",
+};
