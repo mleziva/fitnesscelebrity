@@ -69,7 +69,8 @@ function WorkoutScheduleTableSelector(props) {
 
   if (edit) {
     columns.push({
-      dataField: "listId",
+      dataField: "none",
+      text: "Remove",
       editable: false,
       formatter: (cellContent, row) => {
         return (
@@ -77,7 +78,7 @@ function WorkoutScheduleTableSelector(props) {
             className="btn btn-danger btn-xs"
             onClick={() => onRemoveClick(row.listId)}
           >
-            Delete
+            Remove
           </button>
         );
       },

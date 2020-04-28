@@ -3,7 +3,7 @@ import WorkoutService from "../../services/WorkoutService";
 import WorkoutForm from "./WorkoutForm";
 import CancelButton from "../shared/buttons/cancelbutton";
 import SpinnerPage from "../home/SpinnerPage";
-
+import Jodit from "../shared/editor/Jodit";
 export class WorkoutEditPage extends Component {
   static displayName = WorkoutEditPage.name;
 
@@ -37,6 +37,7 @@ export class WorkoutEditPage extends Component {
         </div>
         <SpinnerPage loading={this.state.loading}></SpinnerPage>
         <WorkoutForm values={workout} onSubmit={this.onSave} />
+        <Jodit />
       </div>
     );
   }
