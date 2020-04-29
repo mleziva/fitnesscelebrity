@@ -4,7 +4,7 @@ a {
 }
 
 code {
-  color: #E01A76;
+  color: #e01a76;
 }
 
 .btn-primary {
@@ -14,9 +14,16 @@ code {
 }
 
 .pathformdiv {
-    background-color: #647ebd;
+  background-color: #647ebd;
 }
 
-.search-list-results{
+.search-list-results {
   height: 50vh;
+}
+
+.jodit-readonly .jodit_statusbar {
+  display: none;
+}
+.jodit-readonly .jodit_workplace {
+  border: none !important;
 }

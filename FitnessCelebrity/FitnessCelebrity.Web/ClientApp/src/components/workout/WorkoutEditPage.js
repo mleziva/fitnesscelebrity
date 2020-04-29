@@ -26,6 +26,15 @@ export class WorkoutEditPage extends Component {
     await WorkoutService.update(values);
     this.props.history.push(`/workout/${this.state.workout.id}`);
   };
+  onContentChange = async (newContent) => {
+    this.setState((prevState) => ({
+      workout: {
+        // object that we want to update
+        ...prevState.workout, // keep all other key-value pairs
+        body: newContent, // update the value of specific key
+      },
+    }));
+  };
   render() {
     let workout = this.state.workout;
     return (
@@ -37,7 +46,7 @@ export class WorkoutEditPage extends Component {
         </div>
         <SpinnerPage loading={this.state.loading}></SpinnerPage>
         <WorkoutForm values={workout} onSubmit={this.onSave} />
-        <Jodit />
+        <Jodit content={workout.body} onContentChange={this.onContentChange} />
       </div>
     );
   }

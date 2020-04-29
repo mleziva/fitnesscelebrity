@@ -4,6 +4,7 @@ import SpanRow from "../../components/home/SpanRow";
 import WorkoutService from "../../services/WorkoutService";
 import { Link } from "react-router-dom";
 import LinkList from "../shared/lists/linklist";
+import JoditReadOnly from "../shared/editor/JoditReadOnly";
 
 export class WorkoutPage extends Component {
   static displayName = WorkoutPage.name;
@@ -43,15 +44,24 @@ export class WorkoutPage extends Component {
           <div className="col">
             <SpanRow value={workout.name} label={"Name"} />
             <SpanRow value={workout.description} label={"Description"} />
-            <SpanRow value={workout.body} label={"Body"} />
             <SpanRow value={workout.tags} label={"Tags"} />
           </div>
         </div>
         <div className="row">
-          <div className="col-sm-6">
-            <h2>Linked FitnessPaths</h2>
+          <div className="col">
+            <h3>Workout</h3>
           </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <JoditReadOnly content={workout.body} />
+          </div>
+        </div>
+        <div className="row">
           <div className="col-sm-6">
+            <h2>Fitness Paths which feature this workout</h2>
+          </div>
+          <div className="col-sm-6 d-none">
             <Link
               className="btn btn-primary float-right"
               to={this.props.location.pathname + "/fitnessPaths/edit"}
@@ -61,7 +71,7 @@ export class WorkoutPage extends Component {
           </div>
         </div>
         <LinkList items={workout.fitnessPaths} path="fitnesspath" />
-        <div className="row">
+        <div className="row d-none">
           <div className="col-sm-6">
             <h2>Linked Movements</h2>
           </div>
