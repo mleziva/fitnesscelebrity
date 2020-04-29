@@ -55,7 +55,7 @@ export class FitnessPathPage extends Component {
         <FitnessPathDetails fitnessPath={fitnessPath} />
         <div className="row">
           <div className="col-sm-4">
-            <h2>Workout Schedule</h2>
+            <h2>Workouts</h2>
           </div>
           <div className="col-sm-2 offset-sm-6">
             <Link

@@ -19,7 +19,7 @@ namespace FitnessCelebrity.Web.Repositories
         public async Task UpdateWorkouts(long id, IList<FitnessPathWorkout> fitnessPathWorkouts)
         {
             var newWorkouts = fitnessPathWorkouts;
-            var existingFitnessPath = await _dbContext.FitnessPaths.FirstOrDefaultAsync(u => u.Id == id);
+            var existingFitnessPath = await _dbContext.FitnessPaths.Include(x=>x.FitnessPathWorkouts).FirstOrDefaultAsync(u => u.Id == id);
             if (existingFitnessPath == null)
             {
                 //not found, can't update

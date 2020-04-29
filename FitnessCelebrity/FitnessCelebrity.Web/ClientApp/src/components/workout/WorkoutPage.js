@@ -84,7 +84,9 @@ export class WorkoutPage extends Component {
             </Link>
           </div>
         </div>
-        <LinkList items={workout.movements} path="movement" />
+        <div className="d-none">
+          <LinkList items={workout.movements} path="movement" />
+        </div>
       </>
     );
   }

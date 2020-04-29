@@ -2,7 +2,8 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import TextInput from "../home/TextInput";
-
+import SelectInput from "../home/SelectInput";
+import * as enums from "../../app/const/EnumConfig";
 function FitnessPathForm(props) {
   const values = props.values ?? {};
   const SignupForm = () => {
@@ -47,6 +48,18 @@ function FitnessPathForm(props) {
               name="body"
               type="text"
               placeholder="15 pushups"
+            />
+            <SelectInput
+              label="Privacy"
+              name="privacy"
+              type="text"
+              options={enums.PrivacyEnum}
+            />
+            <SelectInput
+              label="workout schedule"
+              name="workoutSchedule"
+              type="text"
+              options={enums.WorkoutScheduleEnum}
             />
             <TextInput
               label="Tags"

@@ -28,6 +28,7 @@ namespace FitnessCelebrity.Web.Controllers
             this.configService = controllerService.ConfigurationService;
             this.mapper = controllerService.Mapper;
         }
+        //todo make this a filterable request
         /// <summary>
         /// If user id is not supplied, returns paths of current user
         /// </summary>
@@ -68,7 +69,7 @@ namespace FitnessCelebrity.Web.Controllers
         }
         // POST: api/FitnessPath
         [HttpPost]
-        public async Task<ActionResult> Post(DtoFitnessPathCreate fitnessPath)
+        public async Task<ActionResult> Post(DtoFitnessPath fitnessPath)
         {
             var path = mapper.Map<FitnessPath>(fitnessPath, opt => { opt.Items["UserId"] = User.Identity.GetId(); });
             var createdFitnessPath = await fitnessPathRepository.Create(path);

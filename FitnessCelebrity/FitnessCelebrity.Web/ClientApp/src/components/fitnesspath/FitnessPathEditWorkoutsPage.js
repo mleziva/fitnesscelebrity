@@ -56,6 +56,7 @@ export class FitnessPathEditWorkoutsPage extends Component {
   };
   saveWorkoutSchedule = () => {
     var fitnessPath = this.state.fitnessPath;
+    fitnessPath.workouts = this.state.workouts;
     WorkoutScheduleService.update(fitnessPath);
   };
   render() {

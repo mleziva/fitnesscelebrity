@@ -11,7 +11,6 @@ namespace FitnessCelebrity.Web.Models.Dto
         public string Description { get; set; }
         public string Body { get; set; }
         public string Tags { get; set; }
-        public bool IsPublic { get; set; }
-        public bool IsPrivate { get; set; }
+        public PrivacyStates Privacy { get; set; }
     }
 }

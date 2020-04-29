@@ -6,6 +6,7 @@ function WorkoutScheduleTable(props) {
   const workouts = props.workouts ?? [];
   const columns = props.columns ?? [];
   const edit = props.edit ?? false;
+  const defaultSorted = props.defaultSorted;
 
   if (edit) {
     return (
@@ -13,6 +14,7 @@ function WorkoutScheduleTable(props) {
         keyField="listId"
         data={workouts}
         columns={columns}
+        defaultSorted={defaultSorted}
         cellEdit={cellEditFactory({
           mode: "click",
           blurToSave: true,
@@ -21,7 +23,12 @@ function WorkoutScheduleTable(props) {
     );
   } else {
     return (
-      <BootstrapTable keyField="listId" data={workouts} columns={columns} />
+      <BootstrapTable
+        keyField="listId"
+        data={workouts}
+        columns={columns}
+        defaultSorted={defaultSorted}
+      />
     );
   }
 }
