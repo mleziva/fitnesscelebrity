@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using FitnessCelebrity.Web.Dto.FitnessPath;
+using FitnessCelebrity.Web.Dto.FitnessPathHistory;
 using FitnessCelebrity.Web.Dto.FitnessPathWorkout;
 using FitnessCelebrity.Web.Dto.Movement;
 using FitnessCelebrity.Web.Dto.Workout;
+using FitnessCelebrity.Web.Dto.WorkoutHistory;
 using FitnessCelebrity.Web.Models.Dto.UserProfile;
 using System;
 using System.Collections.Generic;
@@ -111,8 +113,20 @@ namespace FitnessCelebrity.Web.Models.Dto
                 .ForMember(x => x.ModifiedDate, opt => opt.MapFrom(o => DateTimeOffset.UtcNow))
                 .ForMember(d => d.CreatedById, opt => opt.MapFrom((src, dst, _, context) => context.Options.Items["UserId"]))
                 .ForMember(d => d.ModifiedById, opt => opt.MapFrom((src, dst, _, context) => context.Options.Items["UserId"]));
-            
-            
+
+            #region fitnesspathhistory
+            CreateMap<DtoFitnessPathHistory, FitnessPathHistory>()
+                .ForMember(x => x.CreatedDate, opt => opt.MapFrom(o => DateTimeOffset.UtcNow))
+                .ForMember(x => x.ModifiedDate, opt => opt.MapFrom(o => DateTimeOffset.UtcNow))
+                .ForMember(d => d.UserId, opt => opt.MapFrom((src, dst, _, context) => context.Options.Items["UserId"]));
+            #endregion
+
+            #region WorkoutHistory
+            CreateMap<DtoWorkoutHistory, WorkoutHistory>()
+                .ForMember(x => x.CreatedDate, opt => opt.MapFrom(o => DateTimeOffset.UtcNow))
+                .ForMember(x => x.ModifiedDate, opt => opt.MapFrom(o => DateTimeOffset.UtcNow))
+                .ForMember(d => d.UserId, opt => opt.MapFrom((src, dst, _, context) => context.Options.Items["UserId"]));
+            #endregion
 
         }
     }
