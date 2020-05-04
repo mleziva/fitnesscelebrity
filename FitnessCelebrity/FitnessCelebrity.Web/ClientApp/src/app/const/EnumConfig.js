@@ -8,3 +8,8 @@ export const WorkoutScheduleEnum = [
   { id: 1, name: "Date" },
   { id: 2, name: "Day of Week" },
 ];
+export const HistoryStateEnum = [
+  { id: 0, name: "Inactive" },
+  { id: 1, name: "Active" },
+  { id: 2, name: "Completed" },
+];

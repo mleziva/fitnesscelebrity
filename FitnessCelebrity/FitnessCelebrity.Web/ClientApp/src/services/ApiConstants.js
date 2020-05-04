@@ -47,3 +47,7 @@ export const MovementRoutes = {
 export const WorkoutScheduleRoutes = {
   Update: "/api/FitnessPathWorkout/fitnessPath/{id}/workouts",
 };
+export const FitnessPathHistoryRoutes = {
+  Create: "/api/FitnessPathHistory/",
+  Get: "/api/FitnessPathHistory/",
+};

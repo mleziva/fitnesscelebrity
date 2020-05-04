@@ -13,7 +13,7 @@ export class HttpClient {
   }
   async post(url, body) {
     const token = await authService.getAccessToken();
-    return await fetch(url, {
+    var response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
@@ -21,6 +21,11 @@ export class HttpClient {
         Authorization: `Bearer ${token}`,
       },
     });
+    if (response.ok) {
+      return await response.json();
+    } else {
+      console.log(await response.json());
+    }
   }
   async put(url, body) {
     const token = await authService.getAccessToken();

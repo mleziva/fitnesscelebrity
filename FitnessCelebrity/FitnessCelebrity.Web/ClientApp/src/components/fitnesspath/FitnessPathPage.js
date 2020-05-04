@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import FitnessPathService from "../../services/FitnessPathService";
 import SubscribeBtn from "./SubscribeBtn";
 import SpinnerPage from "../home/SpinnerPage";
-import WorkoutList from "../workout/WorkoutList";
+import { CreateBtn } from "../fitnesspathhistory";
 import FitnessPathDetails from "./FitnessPathDetails";
 import { Link } from "react-router-dom";
 import WorkoutScheduleTableSelector from "../workoutschedule/WorkoutScheduleTableSelector";
+import HistoryPanel from "../fitnesspathhistory/HistoryPanel";
 
 export class FitnessPathPage extends Component {
   static displayName = FitnessPathPage.name;
@@ -52,6 +53,7 @@ export class FitnessPathPage extends Component {
             </div>
           </div>
         </div>
+        <HistoryPanel fitnessPathId={fitnessPath.id} />
         <FitnessPathDetails fitnessPath={fitnessPath} />
         <div className="row">
           <div className="col-sm-4">
