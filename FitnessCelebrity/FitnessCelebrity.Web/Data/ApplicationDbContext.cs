@@ -18,6 +18,9 @@ namespace FitnessCelebrity.Web.Data
         public DbSet<Workout> Workouts { get; set; }
         public DbSet<WorkoutMovement> WorkoutMovements { get; set; }
         public DbSet<Movement> Movements { get; set; }
+        public DbSet<WorkoutHistory> WorkoutHistories { get; set; }
+        public DbSet<FitnessPathHistory> FitnessPathHistories { get; set; }
+        public DbSet<DailyLog> DailyLogs { get; set; }
         public ApplicationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
@@ -27,14 +30,11 @@ namespace FitnessCelebrity.Web.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            
-
             //many-to-many relationship for entities
             modelBuilder.Entity<FitnessPathWorkout>()
             .HasOne<FitnessPath>(sc => sc.FitnessPath)
             .WithMany(s => s.FitnessPathWorkouts)
             .HasForeignKey(sc => sc.FitnessPathId);
-
 
             modelBuilder.Entity<FitnessPathWorkout>()
                 .HasOne<Workout>(sc => sc.Workout)
@@ -141,9 +141,9 @@ namespace FitnessCelebrity.Web.Data
             .HasForeignKey(s => s.UserId);
 
             modelBuilder.Entity<WorkoutHistory>()
-            .HasOne<FitnessPath>(s => s.FitnessPath)
+            .HasOne<FitnessPathHistory>(s => s.FitnessPathHistory)
             .WithMany(g => g.WorkoutHistories)
-            .HasForeignKey(s => s.FitnessPathId);
+            .HasForeignKey(s => s.FitnessPathHistoryId);
 
             modelBuilder.Entity<WorkoutHistory>()
             .HasOne<Workout>(s => s.Workout)
@@ -160,6 +160,18 @@ namespace FitnessCelebrity.Web.Data
             .HasOne<ApplicationUser>(s => s.User)
             .WithMany(g => g.DailyLogs)
             .HasForeignKey(s => s.UserId);
+
+            //FitnessPath history 1:many
+            modelBuilder.Entity<FitnessPathHistory>()
+            .HasOne<ApplicationUser>(s => s.User)
+            .WithMany(g => g.FitnessPathHistories)
+            .HasForeignKey(s => s.UserId);
+
+            modelBuilder.Entity<FitnessPathHistory>()
+            .HasOne<FitnessPath>(s => s.FitnessPath)
+            .WithMany(g => g.FitnessPathHistories)
+            .HasForeignKey(s => s.FitnessPathId);
+
         }
     }
 }

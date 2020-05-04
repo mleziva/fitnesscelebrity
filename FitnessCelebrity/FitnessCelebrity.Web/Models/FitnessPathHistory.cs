@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace FitnessCelebrity.Web.Models
 {
-    public class WorkoutHistory : BaseDateData
+    public class FitnessPathHistory : BaseDateData
     {
-        public long WorkoutId { get; set; }
-        public long? FitnessPathHistoryId { get; set; }
+        public long FitnessPathId { get; set; }
         public string UserId { get; set; }
         public PrivacyStates Privacy { get; set; }
         public HistoryStates State { get; set; }
@@ -16,14 +15,8 @@ namespace FitnessCelebrity.Web.Models
         public DateTimeOffset StartedDate { get; set; }
         public DateTimeOffset CompletedDate { get; set; }
         public ApplicationUser User { get; set; }
-        public Workout Workout { get; set; }
-        public FitnessPathHistory FitnessPathHistory { get; set; }
-        public IEnumerable<DailyLog> DailyLogs { get; set; }
-    }
-    public enum HistoryStates
-    {
-        Inactive,
-        Active,
-        Completed
+        public FitnessPath FitnessPath { get; set; }
+        public IEnumerable<WorkoutHistory> WorkoutHistories { get; set; }
+
     }
 }

@@ -11,7 +11,7 @@ namespace FitnessCelebrity.Web.Models
         public WorkoutSchedule WorkoutSchedule { get; set; }
         public virtual IList<FitnessPathWorkout> FitnessPathWorkouts { get; set; }
         public virtual IList<FitnessPathSubscription> Subscriptions { get; set; }
-        public virtual IList<WorkoutHistory> WorkoutHistories { get; set; }
+        public virtual IList<FitnessPathHistory> FitnessPathHistories { get; set; }
 
     }
     public enum WorkoutSchedule

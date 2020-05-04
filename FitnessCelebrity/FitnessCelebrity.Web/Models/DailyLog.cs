@@ -11,8 +11,7 @@ namespace FitnessCelebrity.Web.Models
         public string UserId { get; set; }
         public int TimeSpent { get; set; }
         public string Notes { get; set; }
-        public bool IsPublic { get; set; }
-        public bool IsPrivate { get; set; }
+        public PrivacyStates Privacy { get; set; }
         public ApplicationUser User { get; set; }
         public WorkoutHistory WorkoutHistory { get; set; }
     }
