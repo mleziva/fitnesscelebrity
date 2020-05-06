@@ -9,6 +9,7 @@ import EsTable from "../shared/tables/EsTable";
 import FitnessPathService from "../../services/FitnessPathService";
 import MovementService from "../../services/MovementService";
 import WorkoutService from "../../services/WorkoutService";
+import AccordionCaret from "../shared/icons/AccordionCaret";
 
 export class ManagePage extends Component {
   static displayName = ManagePage.name;
@@ -26,7 +27,7 @@ export class ManagePage extends Component {
                   <div className="row">
                     <div className="col-sm-1">
                       <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                        Caret
+                        <AccordionCaret eventKey="0" />
                       </Accordion.Toggle>
                     </div>
                     <div className="col-sm-5">
