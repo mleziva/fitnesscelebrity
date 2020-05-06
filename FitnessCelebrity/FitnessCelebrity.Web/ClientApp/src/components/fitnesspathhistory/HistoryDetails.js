@@ -1,15 +1,17 @@
 import React from "react";
-import SpanRow from "../home/SpanRow";
+import { Link } from "react-router-dom";
 
 export default function HistoryDetails(props) {
   const fph = props.fitnessPathHistory;
   return (
     <>
-      <SpanRow
-        value={fph.startedDate}
-        label={"Started Date"}
-        name="startedDate"
-      />
+      <p>
+        You started this fitnesspath on{" "}
+        {new Date(fph.startedDate).toLocaleDateString("en-US")}
+      </p>
+      <p>
+        <Link to="">View Progress</Link>
+      </p>
     </>
   );
 }

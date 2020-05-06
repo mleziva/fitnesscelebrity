@@ -5,10 +5,14 @@ import authService from "../components/api-authorization/AuthorizeService";
 import { HistoryStateEnum } from "../app/const/EnumConfig";
 
 export class FitnessPathHistoryService {
-  async getMyCurrentlyActive() {
+  async getMyCurrentlyActive(fitnessPathId) {
     var userId = await authService.getSubClaim();
     var stateObj = HistoryStateEnum.find((o) => o.name === "Active");
-    var params = { userid: userId, state: stateObj.id };
+    var params = {
+      userid: userId,
+      state: stateObj.id,
+      fitnessPathId: fitnessPathId,
+    };
     const url = FitnessPathHistoryRoutes.Get + Helper.buildQueryString(params);
     const response = await HttpClient.get(url);
     return await response.json();
@@ -28,8 +32,8 @@ export class FitnessPathHistoryService {
       privacy: 0,
       state: stateObj.id,
       notes: null,
-      startedDate: "2020-05-04T16:55:23.725Z",
-      completedDate: "2020-05-04T16:55:23.725Z",
+      startedDate: Helper.getLocalISOTime(),
+      completedDate: null,
     };
     return await this.create(fpHistory);
   }

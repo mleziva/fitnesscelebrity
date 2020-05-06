@@ -4,14 +4,16 @@ using FitnessCelebrity.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FitnessCelebrity.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200506135350_nullabletime")]
+    partial class nullabletime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,7 +185,7 @@ namespace FitnessCelebrity.Web.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTimeOffset?>("CompletedDate")
+                    b.Property<DateTimeOffset>("CompletedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<DateTimeOffset>("CreatedDate")
@@ -201,7 +203,7 @@ namespace FitnessCelebrity.Web.Migrations
                     b.Property<int>("Privacy")
                         .HasColumnType("int");
 
-                    b.Property<DateTimeOffset?>("StartedDate")
+                    b.Property<DateTimeOffset>("StartedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<int>("State")

@@ -13,8 +13,8 @@ namespace FitnessCelebrity.Web.Models
         public PrivacyStates Privacy { get; set; }
         public HistoryStates State { get; set; }
         public string Notes { get; set; }
-        public DateTimeOffset StartedDate { get; set; }
-        public DateTimeOffset CompletedDate { get; set; }
+        public DateTimeOffset? StartedDate { get; set; }
+        public DateTimeOffset? CompletedDate { get; set; }
         public ApplicationUser User { get; set; }
         public Workout Workout { get; set; }
         public FitnessPathHistory FitnessPathHistory { get; set; }

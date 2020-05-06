@@ -6,21 +6,34 @@ import CreateBtn from "./CreateBtn";
 export default function HistoryPanel(props) {
   const [fitnessPathHistory, setFitnessPathHistory] = useState({});
   useEffect(() => {
-    load();
-  }, []);
+    if (props.fitnessPathId) load(props.fitnessPathId);
+  }, [props.fitnessPathId]);
 
-  const load = async () => {
-    let results = await FitnessPathHistoryService.getMyCurrentlyActive();
+  const load = async (fpId) => {
+    let results = await FitnessPathHistoryService.getMyCurrentlyActive(fpId);
     setFitnessPathHistory(results[0]);
+  };
+  const onActivated = (activeHistory) => {
+    setFitnessPathHistory(activeHistory);
   };
 
   let content;
-
   if (fitnessPathHistory) {
     content = <HistoryDetails fitnessPathHistory={fitnessPathHistory} />;
   } else {
-    content = <CreateBtn fitnessPathId={props.fitnessPathId} />;
+    content = (
+      <CreateBtn
+        fitnessPathId={props.fitnessPathId}
+        onActivated={onActivated}
+      />
+    );
   }
 
-  return <>{content}</>;
+  return (
+    <>
+      <div class="card">
+        <div class="card-body">{content}</div>
+      </div>
+    </>
+  );
 }

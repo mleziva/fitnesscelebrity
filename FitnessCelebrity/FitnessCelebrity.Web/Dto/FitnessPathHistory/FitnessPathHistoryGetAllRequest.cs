@@ -10,5 +10,6 @@ namespace FitnessCelebrity.Web.Dto.FitnessPathHistory
     public class FitnessPathHistoryGetAllRequest : PageableUserIdRequest
     {
         public HistoryStates? State { get; set; }
+        public long? FitnessPathId { get; set; }
     }
 }

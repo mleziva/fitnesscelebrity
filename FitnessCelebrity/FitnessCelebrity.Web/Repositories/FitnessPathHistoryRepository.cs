@@ -26,6 +26,10 @@ namespace FitnessCelebrity.Web.Repositories
             {
                 query = query.Where(i => i.State == request.State);
             }
+            if (request.FitnessPathId != null)
+            {
+                query = query.Where(i => i.FitnessPathId == request.FitnessPathId);
+            }
             return await PagingList<FitnessPathHistory>.CreateAsync(query, request.Page, request.Size);
         }
     }

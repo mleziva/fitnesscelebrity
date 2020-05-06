@@ -13,7 +13,7 @@ namespace FitnessCelebrity.Web.Dto.FitnessPathHistory
         public PrivacyStates Privacy { get; set; }
         public HistoryStates State { get; set; }
         public string Notes { get; set; }
-        public DateTimeOffset StartedDate { get; set; }
-        public DateTimeOffset CompletedDate { get; set; }
+        public DateTimeOffset? StartedDate { get; set; }
+        public DateTimeOffset? CompletedDate { get; set; }
     }
 }
