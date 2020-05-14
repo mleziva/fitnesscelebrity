@@ -31,8 +31,8 @@ export default function HistoryPanel(props) {
 
   return (
     <>
-      <div class="card">
-        <div class="card-body">{content}</div>
+      <div className="card">
+        <div className="card-body">{content}</div>
       </div>
     </>
   );

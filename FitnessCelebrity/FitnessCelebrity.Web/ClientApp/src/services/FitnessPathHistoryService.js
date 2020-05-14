@@ -5,6 +5,11 @@ import authService from "../components/api-authorization/AuthorizeService";
 import { HistoryStateEnum } from "../app/const/EnumConfig";
 
 export class FitnessPathHistoryService {
+  async getById(id) {
+    const url = FitnessPathHistoryRoutes.Get + id;
+    const response = await HttpClient.get(url);
+    return await response.json();
+  }
   async getMyCurrentlyActive(fitnessPathId) {
     var userId = await authService.getSubClaim();
     var stateObj = HistoryStateEnum.find((o) => o.name === "Active");

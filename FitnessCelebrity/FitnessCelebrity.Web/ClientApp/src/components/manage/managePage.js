@@ -115,10 +115,10 @@ export class ManagePage extends Component {
               </Card>
             </Accordion>
           </Tab>
-          <Tab eventKey="activity" title="Activity">
+          <Tab eventKey="active" title="Active">
             "thing 2"
           </Tab>
-          <Tab eventKey="history" title="History">
+          <Tab eventKey="complete" title="Completed">
             "thing 3"
           </Tab>
         </Tabs>

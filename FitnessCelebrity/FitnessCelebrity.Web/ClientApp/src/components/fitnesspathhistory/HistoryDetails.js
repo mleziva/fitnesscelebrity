@@ -10,7 +10,7 @@ export default function HistoryDetails(props) {
         {new Date(fph.startedDate).toLocaleDateString("en-US")}
       </p>
       <p>
-        <Link to="">View Progress</Link>
+        <Link to={"/fitnessPathHistory/" + fph.id}>View Progress</Link>
       </p>
     </>
   );

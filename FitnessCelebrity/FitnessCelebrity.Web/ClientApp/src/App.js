@@ -12,6 +12,7 @@ import { SearchPage } from "./components/search/SearchPage";
 import AuthorizeRoute from "./components/api-authorization/AuthorizeRoute";
 import ApiAuthorizationRoutes from "./components/api-authorization/ApiAuthorizationRoutes";
 import { ApplicationPaths } from "./components/api-authorization/ApiAuthorizationConstants";
+import { FitnessPathHistoryPage } from "./components/fitnesspathhistory";
 
 import "./custom.css";
 import "./style/loadingSpinner.css";
@@ -29,6 +30,12 @@ export default class App extends Component {
         <WorkoutRoutes />
         <Route exact path="/manage" component={ManagePage} />
         <Route path="/profile/:profileUserName" component={ProfilePage} />
+        <Route
+          exact
+          path="/fitnessPathHistory/:fitnessPathHistoryId"
+          component={FitnessPathHistoryPage}
+        />
+
         <AuthorizeRoute path="/fetch-data" component={FetchData} />
         <Route
           path={ApplicationPaths.ApiAuthorizationPrefix}
