@@ -5,10 +5,17 @@ import WorkoutScheduleTable from "./WorkoutScheduleTable";
 import { Type } from "react-bootstrap-table2-editor";
 import _ from "lodash";
 
+/*
+ <WorkoutScheduleTableSelector
+workoutSchedule={fitnessPath.workoutSchedule}
+workouts={fitnessPath.workouts}
+/> 
+*/
 function WorkoutScheduleTableSelector(props) {
   let workouts = props.workouts ?? [];
   const workoutSchedule = props.workoutSchedule;
   const edit = props.edit ?? false;
+  const showCompleted = props.showCompleted ?? false;
   const onRemoveClick = props.onRemoveClick;
   let defaultSorted = [];
   const ordered = 0;
@@ -155,7 +162,22 @@ function WorkoutScheduleTableSelector(props) {
     dataField: "notes",
     text: "Notes",
   });
-
+  if (showCompleted) {
+    columns.push(
+      {
+        dataField: "startedDate",
+        text: "Started Date",
+      },
+      {
+        dataField: "completedDate",
+        text: "Completed Date",
+      },
+      {
+        dataField: "myNotes",
+        text: "My Notes",
+      }
+    );
+  }
   if (edit) {
     columns.push({
       dataField: "none",

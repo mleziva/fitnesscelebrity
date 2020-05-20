@@ -38,7 +38,7 @@ namespace FitnessCelebrity.Web.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<FitnessPathHistory>> Get(long id)
         {
-            var result = await repository.GetById(id);
+            var result = await repository.GetFullEntityById(id);
             if(result == null)
             {
                 return NotFound();

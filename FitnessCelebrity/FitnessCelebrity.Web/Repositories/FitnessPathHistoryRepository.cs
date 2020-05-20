@@ -32,5 +32,11 @@ namespace FitnessCelebrity.Web.Repositories
             }
             return await PagingList<FitnessPathHistory>.CreateAsync(query, request.Page, request.Size);
         }
+
+        public async Task<FitnessPathHistory> GetFullEntityById(long id)
+        {
+            var fp = await GetAll().Include(x => x.WorkoutHistories).ThenInclude(x => x.DailyLogs).FirstOrDefaultAsync(x => x.Id == id);
+            return fp;
+        }
     }
 }

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import SpinnerPage from "../home/SpinnerPage";
-import { FitnessPathHistoryService } from "../../services";
+import { FitnessPathHistoryService, FitnessPathService } from "../../services";
 import { SpanRow } from "../home";
+import { WorkoutScheduleTableCompleted } from "../workoutschedule";
 export class FitnessPathHistoryPage extends Component {
   static displayName = FitnessPathHistoryPage.name;
 
@@ -9,10 +10,13 @@ export class FitnessPathHistoryPage extends Component {
     super(props);
     this.state = {
       fitnessPathHistory: {},
+      fitnessPath: {},
       loading: true,
     };
   }
 
+  //load fitness path and fitness path history
+  //compare workouts and add like for viewing finished workouts
   componentDidMount() {
     const {
       match: { params },
@@ -20,17 +24,22 @@ export class FitnessPathHistoryPage extends Component {
     this.loadFitnessPathHistory(params.fitnessPathHistoryId);
   }
   async loadFitnessPathHistory(id) {
-    let data = await FitnessPathHistoryService.getById(id);
-    this.setState({ fitnessPathHistory: data, loading: false });
+    let fph = await FitnessPathHistoryService.getById(id);
+    let fp = await FitnessPathService.getById(fph.fitnessPathId);
+    this.setState({ fitnessPathHistory: fph, fitnessPath: fp, loading: false });
   }
 
   render() {
+    let fitnessPath = this.state.fitnessPath;
+    let fitnessPathHistory = this.state.fitnessPathHistory;
     return (
       <>
         <SpinnerPage loading={this.state.loading}></SpinnerPage>
-        <SpanRow
-          label="Started Date"
-          value={this.state.fitnessPathHistory.startedDate}
+        <SpanRow label="Started Date" value={fitnessPathHistory.startedDate} />
+        <WorkoutScheduleTableCompleted
+          workoutSchedule={fitnessPath.workoutSchedule}
+          workouts={fitnessPath.workouts}
+          completedWorkouts={fitnessPathHistory.workoutHistories}
         />
       </>
     );

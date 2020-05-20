@@ -12,5 +12,6 @@ namespace FitnessCelebrity.Web.Repositories
     public interface IFitnessPathHistoryRepository : IBaseRepository<FitnessPathHistory>
     {
         Task<PagingList<FitnessPathHistory>> Get(FitnessPathHistoryGetAllRequest request);
+        Task<FitnessPathHistory> GetFullEntityById(long id);
     }   
 }
