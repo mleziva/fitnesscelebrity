@@ -51,3 +51,7 @@ export const FitnessPathHistoryRoutes = {
   Create: "/api/FitnessPathHistory/",
   Get: "/api/FitnessPathHistory/",
 };
+export const WorkoutHistoryRoutes = {
+  Create: "/api/WorkoutHistory/",
+  Get: "/api/WorkoutHistory/",
+};
