@@ -9,7 +9,7 @@
     "jodit-react": "^1.0.42",
     "jquery": "^3.5.0",
     "list.js": "^1.5.0",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "merge": "^2.1.1",
     "oidc-client": "^1.11.5",
     "react": "^16.0.0",
